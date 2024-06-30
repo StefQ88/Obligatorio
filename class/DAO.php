@@ -50,7 +50,7 @@
                 $this->resultado['data'] = $mensaje;
         }
         
-        public function getResultado2(string $sql, array $parametros){
+        public function getResultado(string $sql, array $parametros){
             $res = [];
             $this->query = $this->con->prepare($sql);
             try {
