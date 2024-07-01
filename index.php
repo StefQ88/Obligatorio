@@ -2,6 +2,7 @@
 //session_start();
 include_once "comun.php";
 include_once "tablas.php";
+include_once "class/datos.php";
 if (isset($_SESSION['usuario'])) {
     $user = $_SESSION['usuario'];
 ?>
@@ -81,28 +82,12 @@ if (isset($_SESSION['usuario'])) {
 
     <?php 
         $ciEmpleado = $_SESSION['usuario']['ci'];
+        
+        $dato->buscarDatos($ciEmpleado);
 
         crearTabla();
         crearCabezal("id sala", "ci empleado", "hora de inicio", "hora de fin");
-        $dat = $dato->getDatos($ciEmpleado);
-        //echo count($dat); echo '<br /><br /><br /><br /><br /><br>';
-        /*foreach ($dat as $d){
-            echo $d;
-            echo '<br /><br /><br /><br /><br /><br>';
-        }*/
-            
-            /*for ($i = 0; $i < count($dat); $i++)
-            {
-                $idSala = $dat['idSala'][$i];
-                $ciEmpleado = $dat['ciEmpleado'][$i];
-                $horaInicio = $dat['horaInicio'][$i];
-                $horaFin = $dat['horaFin'][$i];
-                ingresarDatosConFila($idSala, $ciEmpleado,$horaInicio, $horaFin);
-            }*/
-            $idSala = $dat['data'];
-            $horaInicio = $dat['data']['horaInicio'];
-            $horaFin = $dat['data']['horaFin'];
-            ingresarDatosConFila($idSala, $ciEmpleado,$horaInicio, $horaFin);
+        
         
         cerrarTabla();
     ?>
