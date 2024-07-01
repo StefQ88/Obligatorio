@@ -24,14 +24,14 @@ if(isset($_POST['actualizar'])){
 	    exit;
     }else {
 
-      if (isset($_FILES['fotoPerfil']['name']) AND !empty($_FILES['fotoPerfil']['name'])) {
+      if (isset($_FILES['fotoPerfil']['name']) AND empty($_FILES['fotoPerfil']['name'])) {
          
         
          $img_name = $_FILES['fotoPerfil']['name'];
          $tmp_name = $_FILES['fotoPerfil']['tmp_name'];
          $error = $_FILES['fotoPerfil']['error'];
          
-         if($error === 0){
+         if($error === 0 or empty($img_name)){
             $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
             $img_ex_to_lc = strtolower($img_ex);
 
@@ -39,28 +39,18 @@ if(isset($_POST['actualizar'])){
             if(in_array($img_ex_to_lc, $allowed_exs)){
                $newImgName = uniqid($_SESSION['usuario']['ci'], true).'.'.$img_ex_to_lc;
                $img_upload_path = 'uploads/'.$newImgName;
-               // Delete old profile pic
-              /* $old_pp_des = "uploads/$fotoVieja";
-               if(unlink($old_pp_des)){
-               	  // just deleted
-               	  move_uploaded_file($tmp_name, $img_upload_path);
-               }else {
-                  // error or already deleted
-               	  move_uploaded_file($tmp_name, $img_upload_path);
-               }*/
-               
-
-               // update the Database
-              /* $sql = "UPDATE users 
-                       SET fname=?, username=?, pp=?
-                       WHERE id=?";
-               $stmt = $conn->prepare($sql);
-               $stmt->execute([$fname, $uname, $new_img_name, $id]);
-               $_SESSION['fname'] = $fname;*/
-               $usuario->actualizarUsuario($primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $fechaNacimiento, $email, $newImgName);
+               move_uploaded_file($tmp_name, $img_upload_path);
+             
+               $usuario->actualizarUsuario($_SESSION['usuario']['ci'],$primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $fechaNacimiento, $email, $newImgName);
                header("Location: perfil.php?success=Your account has been updated successfully");
                 exit;
-            }else {
+            }else if(empty($img_name)){
+               $usuario->actualizarUsuario($_SESSION['usuario']['ci'],$primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $fechaNacimiento, $email, '');
+               header("Location: perfil.php?success=Your account has been updated successfully");
+           }else{
+               header("Location: perfil.php?error=$em&$data");
+               exit();
+           }{
                $em = "You can't upload files of this type";
                header("Location: perfil.php?error=$em&$data");
                exit;
@@ -72,15 +62,8 @@ if(isset($_POST['actualizar'])){
          }
 
         
-      }else {/*
-       	$sql = "UPDATE users 
-       	        SET fname=?, username=?
-                WHERE id=?";
-       	$stmt = $conn->prepare($sql);
-       	$stmt->execute([$fname, $uname, $id]);*/
-        $usuario->actualizarUsuario($primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $fechaNacimiento, $email, $newImgName);
-
-       	header("Location: perfil.php?success=Your account has been updated successfully");
+      }else {
+       	header("Location: perfil.php?success=Your account has not been updated successfully");
    	    exit;
       }
     }

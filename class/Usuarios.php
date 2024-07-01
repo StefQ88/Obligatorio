@@ -59,13 +59,12 @@
             $consulta->execute();
         }
 
-        public function actualizarUsuario($primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $fechaNacimiento, $email, $fotoPerfil){
+        public function actualizarUsuario($ci,$primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $fechaNacimiento, $email, $fotoPerfil){
             
             $sql = 'UPDATE usuarios SET (primerNombre = :primerNombre, segundoNombre = :segundoNombre, primerApellido = :primerApellido, segundoApellido = :segundoApellido, fechaNacimiento = :fechaNacimiento, email = :email, fotoPerfil = :fotoPerfil) WHERE ci = :ci';
 
             $consulta = $this->con->prepare($sql);
-            
-            $consulta->bindValue(':ci', $_SESSION['usuario']['ci']);
+            $consulta->bindValue(':ci', $ci);
             $consulta->bindValue(':primerNombre' , $primerNombre);
             $consulta->bindValue(':segundoNombre' , $segundoNombre);
             $consulta->bindValue(':primerApellido' , $primerApellido);
