@@ -91,5 +91,18 @@ class sala{
         echo "<td>".$this->foto."</td>";
         echo "</tr>";
     }
+
+    public static function validarDatos($id, $nombre, $capacidad,$ubicacion,$foto){
+        if (empty($id) || empty($nombre) || empty($capacidad) || empty($ubicacion) || empty($foto)){
+            return false;
+        }
+     return true;
+    }
+
+
+
+
+
+
 }
 ?>

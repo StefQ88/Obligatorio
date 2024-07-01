@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ingreso de nuevas salas</title>
+    <title>Ingreso de nuevas salas de conferencias</title>
     <link rel="stylesheet" type="text/css" href="css/estilos.css">
 </head>
 <body>
     <div class="container">
-        <div class="title">Ingreso de nuevas salas de conferencia</div>
+        <div class="title">Ingreso de nueva sala</div>
         <div class="content">
              <form action="ingreso_salas.php" method="post" enctype="multipart/form-data">
                 <div class="detalles-usuario">
@@ -28,32 +28,23 @@
                         <span class="detalles">Equipamiento Disponible</span>
                         <textarea name="equipamientoDisponible" rows="3"></textarea>
                     </div>
-
-
-                </div>
-
-
-
-                
-     
-     
-     
-     
-     
-     
-     
+                    <div class="input-box">
+                        <span class="detalles">Estado</span>
+                        <select name="estado">
+                            <option value="disponible">disponible</option>
+                            <option value="no_disponible">no disponible</option>
+                        </select>
+                    </div>
+                    <div class="input-box">
+                        <span class="detalles">Foto de la Sala</span>
+                        <input type="file" name="fotoSala" required>
+                    </div>             
+                    <div class="button">
+                        <input type="submit" value="Registrar"><br>
+                    </div>
+                </div>   
             </form>  
-        
-
-
-
-
-
         </div>
-
-
-
     </div>
-
 </body>
 </html>
