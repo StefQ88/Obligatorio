@@ -4,6 +4,9 @@ setlocale(LC_TIME, 'es_ES.UTF-8','esp');
 
     require_once "class/Usuarios.php";
     require_once "class/datos.php";
+    require_once "class/SalaDeConferencias.php";
+
+
     function getParamAndSet($parameter, &$variable){
         if (isset($_GET[$parameter])){
             $variable = $_GET[$parameter];
@@ -27,5 +30,8 @@ setlocale(LC_TIME, 'es_ES.UTF-8','esp');
     }else{
         unset($_SESSION['usuario']);
     }
+
+    
+
 
 ?>

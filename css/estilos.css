@@ -93,3 +93,42 @@ form .button input{
 form .button input:hover{
     background: linear-gradient(-135deg, #71b7e6, #9b59b6);
 }
+
+.input-box textarea {
+    height: 100px; 
+    width: 100%;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease; 
+}
+
+.input-box textarea:focus {
+    border-color: #9b59b6; /
+}
+
+.input-box textarea:focus + .detalles {
+    color: #9b59b6; 
+}
+
+
+.input-box select {
+    height: 45px;
+    width: 100%;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease; 
+}
+
+.input-box select:focus {
+    border-color: #9b59b6; 
+}
+
+.input-box select:focus + .detalles {
+    color: #9b59b6; 
+}
