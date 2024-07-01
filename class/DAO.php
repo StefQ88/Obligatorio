@@ -50,6 +50,7 @@
                 $this->resultado['data'] = $mensaje;
         }
         
+        /*
         public function getResultado(string $sql, array $parametros){
             $res = [];
             $this->query = $this->con->prepare($sql);
@@ -58,7 +59,7 @@
                 /*while($data = $this->query->fetchAll(PDO::FETCH_ASSOC)){
                     $res = [false,$data];
                 }*/
-                $res = $this->query->fetchAll(PDO::FETCH_ASSOC);
+             /*   $res = $this->query->fetchAll(PDO::FETCH_ASSOC);
             }catch(PDOException $ex){
                 $res = [true, $ex->getMessage()];
             }finally{
@@ -68,6 +69,10 @@
                     $res = ['false']['data'];
                 //$this->resultado['data'] = $res;
             }
+        } */
+
+        public function getResultado(){
+            return $this->resultado;
         }
 
         public function close(){

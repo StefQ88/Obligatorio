@@ -10,19 +10,16 @@
         $ubicacion = $_POST['ubicacion'];
         $equipamientoDisponible = isset($_POST['equipamientoDisponible']) ? $_POST['equipamientoDisponible'] : null; //si esta definido con valor asigno valor, de lo contrario null
         $estado = isset($_POST['estado']) ? $_POST['estado'] : null;
-        $fotoSala = $_FILES['fotoSala'];
 
          //--------------------------------------
          //VALIDO DATOS
 
         if(SalaDeConferencias :: validarDatos($id,$nombre,$capacidad,$ubicacion,$fotoSala)){
 
-            $nuevaSala = new SalaDeConferencias($id,$nombre,$capacidad,$equipamientoDisponible,$estado,$fotoSala);
-
-            $fotoNombre = $_FILES['fotoSala']['name'];
-            $fotoTmp = $_FILES['fotoSala']['tmp_name'];
-            $fotoSize = $_FILES['fotoSala']['size'];
-            $fotoError = $_FILES['fotoSala']['error'];
+            $fotoNombre = $_FILES['foto']['name'];
+            $fotoTmp = $_FILES['foto']['tmp_name'];
+            $fotoSize = $_FILES['foto']['size'];
+            $fotoError = $_FILES['foto']['error'];
 
             //OBTENGO EXTENSION FOTO
             $fotoExt = strtolower(pathinfo($fotoNombre, PATHINFO_EXTENSION)); 
@@ -30,31 +27,41 @@
             $formatosPermitidos = array('jpg','jpeg','png','gif');
             if (in_array($fotoExt, $formatosPermitidos) && $fotoError ===0){
                 $fotoActual = 'uploads/' . uniqid('', true). '.'. $fotoExt;   //creo ruta para guardar archivo
-            }
+                move_uploaded_file($fotoTmp, $fotoActual);
+            } else {
+                header ('Location: ingresar_salas.php?error=El formato de la foto no es válidoo hubo un error al subirla.');
+                exit();
+            } 
+
+            $sala = new sala($id,$nombre,$capacidad,$ubicacion,$equipamientoDisponible,$estado,$foto);
 
 
 
 
-        } else {
+            
+
+
+
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    } 
+    }    
 ?>
     
