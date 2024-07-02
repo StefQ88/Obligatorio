@@ -1,8 +1,8 @@
 <?php
 
-require_once 'DAO.php';
+require_once '../class/DAO.php';
 
-class sala extends DAO
+class Sala 
 {
     private $id;
     private $nombre;
@@ -14,6 +14,7 @@ class sala extends DAO
     //CONSTRUCTOR --------------------------------
     public function __construct($nombre, $capacidad, $ubicacion, $equipamientoDisponible, $estado, $foto)
     {
+        
         // $this->id=$id;
         $this->nombre = $nombre;
         $this->capacidad = $capacidad;
@@ -115,42 +116,5 @@ class sala extends DAO
         echo "</tr>";
     }
 
-    //metodo para validar datos
-    public static function validarDatos($nombre, $capacidad, $ubicacion, $foto)
-    {
-        if (empty($nombre) || empty($capacidad) || empty($ubicacion) || empty($foto)) {
-            return false;
-        }
-        return true;
-    }
-
-
-    //metodo para insertar sala
-    public function insertarSala()
-    {
-        try {
-            $dao = new DAO();
-
-            $sql = 'INSERT INTO saladeconferencias (nombre, capacidad, ubicacion,foto)
-                    VALUES (:nombre, :capacidad, :ubicacion, :foto)';
-
-            $parametros = array(
-                ':nombre' => $this->nombre,
-                ':capacidad' => $this->capacidad,
-                ':ubicacion' => $this->ubicacion,
-                ':foto' => $this->foto
-            );
-
-            $dao->execute($sql, $parametros);
-
-            $resultado = $dao->getResultado();
-            if ($resultado['error']) {
-                return false;
-            } else {
-                return true;
-            }
-        } catch (PDOException $ex) {
-            return false;
-        }
-    }
+  
 }
