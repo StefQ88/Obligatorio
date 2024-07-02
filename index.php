@@ -84,12 +84,12 @@ if (isset($_SESSION['usuario'])) {
         $ciEmpleado = $_SESSION['usuario']['ci'];
         
         $dato->buscarDatos($ciEmpleado);
-
+                    /*
         crearTabla();
         crearCabezal("id sala", "ci empleado", "hora de inicio", "hora de fin");
         
         
-        cerrarTabla();
+        cerrarTabla();*/
     ?>
     <script>
         function showSidebar() {

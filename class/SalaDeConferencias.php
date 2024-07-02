@@ -1,8 +1,8 @@
 <?php
 
-require_once '../class/DAO.php';
+//require_once '../class/DAO.php';
 
-class Sala 
+class Sala extends DAO
 {
     private $id;
     private $nombre;
