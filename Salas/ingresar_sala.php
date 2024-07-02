@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ingreso de nuevas salas de conferencias</title>
-    <link rel="stylesheet" type="text/css" href="css/estilos.css">
+    <link rel="stylesheet" type="text/css" href="../css/estilos.css">
 </head>
+
 <body>
     <div class="container">
         <div class="title">Ingreso de nueva sala</div>
         <div class="content">
-             <form action="ingreso_salas.php" method="post" enctype="multipart/form-data">
+            <?php
+            if (isset($_GET['error'])) {
+                echo "<p class='error'>" . htmlspecialchars($_GET['error']) . "</p>"; //verifico si hay mensaje de error en la URL
+            }
+            ?>
+            <form action="procesar_ingreso_sala.php" method="post" enctype="multipart/form-data">
                 <div class="detalles-usuario">
                     <div class="input-box">
                         <span class="detalles">Nombre de la Sala</span>
@@ -26,7 +33,7 @@
                     </div>
                     <div class="input-box">
                         <span class="detalles">Equipamiento Disponible</span>
-                        <textarea name="equipamientoDisponible" rows="3"></textarea>
+                        <textarea name="equipamientoDisponible" rows="3" placeholder="proyector, pizarra, etc."></textarea>
                     </div>
                     <div class="input-box">
                         <span class="detalles">Estado</span>
@@ -37,14 +44,15 @@
                     </div>
                     <div class="input-box">
                         <span class="detalles">Foto de la Sala</span>
-                        <input type="file" name="fotoSala" required>
-                    </div>             
+                        <input type="file" name="foto" required>
+                    </div>
                     <div class="button">
                         <input type="submit" value="Registrar"><br>
                     </div>
-                </div>   
-            </form>  
+                </div>
+            </form>
         </div>
     </div>
 </body>
+
 </html>
