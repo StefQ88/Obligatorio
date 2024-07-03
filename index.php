@@ -1,7 +1,6 @@
 <?php 
 //session_start();
 include_once "comun.php";
-include_once "tablas.php";
 include_once "class/datos.php";
 if (isset($_SESSION['usuario'])) {
     $user = $_SESSION['usuario'];
