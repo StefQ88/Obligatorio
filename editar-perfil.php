@@ -11,8 +11,16 @@ if(isset($_POST['actualizar'])){
     $segundoApellido = $_POST['segundoApellido'];
     $fechaNacimiento = $_POST['fechaNacimiento'];
     $email = $_POST['email'];
-    $fotoVieja = $_POST['fotoVieja'];
+    $fotoVieja = $_FILES['fotoPerfil']['name'];
     //$id = $_SESSION['id'];
+
+   /* echo "<p>".$primerNombre . "</p>";
+    echo "<p>".$segundoNombre. "</p>";
+    echo "<p>".$primerApellido. "</p>";
+    echo "<p>".$segundoApellido. "</p>";
+    echo "<p>".$fechaNacimiento. "</p>";
+    echo "<p>".$email. "</p>";
+    echo "<p>". $fotoVieja. "</p>";*/
 
     if (empty($primerNombre)) {
     	$em = "el primer nombre es requerido";
@@ -40,7 +48,7 @@ if(isset($_POST['actualizar'])){
                $newImgName = uniqid($_SESSION['usuario']['ci'], true).'.'.$img_ex_to_lc;
                $img_upload_path = 'uploads/'.$newImgName;
                move_uploaded_file($tmp_name, $img_upload_path);
-             
+               //harcodear estos valores 
                $usuario->actualizarUsuario($_SESSION['usuario']['ci'],$primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $fechaNacimiento, $email, $newImgName);
                header("Location: perfil.php?success=Your account has been updated successfully");
                 exit;

@@ -31,7 +31,7 @@ if (isset($_SESSION['usuario'])) {
         <ul>
             <li><a href="test.php">OfficeSpaces</a></li>
             <li> Hello, <?php echo $_SESSION['usuario']['primerNombre']; ?></li>
-                
+            <li>   <?php echo $_SESSION['usuario']['primerApellido']; ?></li>
             <li>    
                 <?php if (empty($_SESSION['usuario']['fotoPerfil'])){?>
                     <img src="uploads/default-pp.png" class="img-fluid rounded-circle" style="width: 6%;">
@@ -84,6 +84,7 @@ if (isset($_SESSION['usuario'])) {
         $ciEmpleado = $_SESSION['usuario']['ci'];
         
         $dato->buscarDatos($ciEmpleado);
+
                     /*
         crearTabla();
         crearCabezal("id sala", "ci empleado", "hora de inicio", "hora de fin");
@@ -91,6 +92,7 @@ if (isset($_SESSION['usuario'])) {
         
         cerrarTabla();*/
     ?>
+
     <script>
         function showSidebar() {
             const sidebar = document.querySelector('.sidebar');
