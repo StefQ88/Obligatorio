@@ -1,7 +1,7 @@
 <?php
 
-include_once "../comun.php";
-include_once "../class/SalaDeConferencias.php";
+include_once "comun.php";
+include_once "class/SalaDeConferencias.php";
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -37,19 +37,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         exit();
                     
                 } else {
-                    header('Location: ingresar_sala.php?error=Error al mover el archivo de imagen.');
+                    header('Location: index.php?error=Error al mover el archivo de imagen.');
                     exit();
                 }
             } else {
-                header('Location: ingresar_sala.php?error=El formato de la foto no es válido.');
+                header('Location: index.php?error=El formato de la foto no es válido.');
                 exit();
             }
         } else {
-            header('Location: ingresar_sala.php?error=Error en la subida de la imagen.');
+            header('Location: index.php?error=Error en la subida de la imagen.');
             exit();
         }
     } else {
-        header('Location: ingresar_sala.php?error=Faltan datos obligatorios.');
+        header('Location: index.php?error=Faltan datos obligatorios.');
         exit();
     }
 }
