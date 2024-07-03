@@ -44,7 +44,7 @@ if (isset($_SESSION['usuario'])) {
     </nav>
     <a href="logout.php">Logout</a>
     <h2>Tabla de Salas</h2>
-    <table>
+    <!--<table>
         <thead>
             <tr>
                 <th>Imagen de la Sala</th>
@@ -57,7 +57,7 @@ if (isset($_SESSION['usuario'])) {
         <tbody>
             <tr>
                 <td><img src="ruta/a/imagen1.jpg" alt="Imagen Sala 1"></td>
-                <td><?php echo $_SESSION['usuario']['ci'] ?> A</td>
+                <td> A</td>
                 <td>50</td>
                 <td>2024-07-01 09:00</td>
                 <td>2024-07-01 11:00</td>
@@ -77,14 +77,17 @@ if (isset($_SESSION['usuario'])) {
                 <td>2024-07-02 12:00</td>
             </tr>
         </tbody>
-    </table>
+    </table> -->
 
 
     <?php 
-        $ciEmpleado = $_SESSION['usuario']['ci'];
-        
-        $dato->buscarDatos($ciEmpleado);
-
+    
+        if ($_SESSION['usuario']['tipoUsuario']== 'empleado'){
+            //$ciEmpleado = $_SESSION['usuario']['ci'];
+            $dato->buscarDatos($_SESSION['usuario']['ci']);
+        }else if ($_SESSION['usuario']['tipoUsuario']== 'administrador'){
+            $dato->buscarDatos2($_SESSION['usuario']['ci']);
+        }
                     /*
         crearTabla();
         crearCabezal("id sala", "ci empleado", "hora de inicio", "hora de fin");

@@ -49,11 +49,13 @@ if(isset($_POST['actualizar'])){
                $img_upload_path = 'uploads/'.$newImgName;
                move_uploaded_file($tmp_name, $img_upload_path);
                //harcodear estos valores 
+               //$usuario->actualizarUsuario($_SESSION['usuario']['ci'],'Agustin', 'Santiago', 'Sastre', 'Sibilia', '1955-05-05', 'mail@mail.com', 'imagenNueva');
                $usuario->actualizarUsuario($_SESSION['usuario']['ci'],$primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $fechaNacimiento, $email, $newImgName);
                header("Location: perfil.php?success=Your account has been updated successfully");
                 exit;
             }else if(empty($img_name)){
                $usuario->actualizarUsuario($_SESSION['usuario']['ci'],$primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $fechaNacimiento, $email, '');
+               //$usuario->actualizarUsuario($_SESSION['usuario']['ci'],'Agustin', 'Santiago', 'Sastre', 'Sibilia', '1955-05-05', 'mail@mail.com', 'imagenNueva');
                header("Location: perfil.php?success=Your account has been updated successfully");
            }else{
                header("Location: perfil.php?error=$em&$data");
