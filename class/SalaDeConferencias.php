@@ -1,6 +1,6 @@
 <?php
 
-//require_once '../class/DAO.php';
+require_once '../class/DAO.php';
 
 class Sala extends DAO
 {
@@ -103,6 +103,7 @@ class Sala extends DAO
         $this->foto = null;
     }
     //METODOS ---------------------------------
+    //MÉTODO PARA MOSTRAR LA SALA
     public function mostrar()
     {
         echo "<tr>";
@@ -116,5 +117,41 @@ class Sala extends DAO
         echo "</tr>";
     }
 
-  
+    //MÉTODO PARA INSERTAR LA SALA EN LA BASE DE DATOS
+    public function insertarSala(Sala $sala)
+    {
+        try {
+            $sql = 'INSERT INTO saladeconferencias (nombre, capacidad, ubicacion, equipamientoDisponible, estado, foto)
+                    VALUES (:nombre, :capacidad, :ubicacion, :equipamientoDisponible, :estado, :foto)';
+
+            $parametros = array(
+                ':nombre' => $sala->getNombre(),
+                ':capacidad' => $sala->getCapacidad(),
+                ':ubicacion' => $sala->getUbicacion(),
+                ':equipamientoDisponible' => $sala->getEquipamientoDisponible(),
+                ':estado' => $sala->getEstado(),
+                ':foto' => $sala->getFoto()
+            );
+
+            $this->execute($sql, $parametros);
+
+            $resultado = $this->getResultado();
+            if ($resultado['error']) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (PDOException $ex) {
+            return false; 
+        }
+    }
+
+    //MÉTODO PARA VALIDAR DATOS
+    public static function validarDatos($nombre, $capacidad, $ubicacion, $foto)
+    {
+        if (empty($nombre) || empty($capacidad) || empty($ubicacion) || empty($foto)) {
+            return false;
+        }
+        return true;
+    }
 }

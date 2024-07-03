@@ -10,8 +10,8 @@
             $pass = '';
             //$host = '127.0.0.1';
             $db = 'empresa';
-            if ($this->con == null){
 
+            if ($this->con == null){
                 $this->con = new PDO("mysql:host=localhost;dbname={$db};charset=utf8", $user, $pass);
                 $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }
