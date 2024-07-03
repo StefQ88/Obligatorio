@@ -21,7 +21,7 @@ if (isset($_SESSION['usuario'])) {
             <li><a href="index.php">Inicio</a></li>
             <?php if($_SESSION['usuario']['tipoUsuario'] == 'administrador'){?>
             <li><a href="#">Asignacion de reservas</a></li>
-            <li><a href="#">Ingreso de salas</a></li>
+            <li><a href="ingresar_sala.php">Ingreso de salas</a></li>
             <?php } ?>
             <li><a href="#">Historial de reservas</a></li>
             <li><a href="perfil.php">Perfil</a></li>
