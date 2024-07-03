@@ -2,14 +2,14 @@
 
 class Sala extends DAO
 {
-    private $id;
-    private $nombre;
-    private $capacidad;
-    private $ubicacion;
-    private $equipamientoDisponible;
-    private $estado;
-    private $foto;
-    //CONSTRUCTOR --------------------------------
+  /*  public $id;
+    public $nombre;
+    public $capacidad;
+    public $ubicacion;
+    public $equipamientoDisponible;
+    public $estado;
+    public $foto;*/
+   /* //CONSTRUCTOR --------------------------------
     public function __construct($nombre, $capacidad, $ubicacion, $equipamientoDisponible, $estado, $foto)
     {
         
@@ -32,10 +32,10 @@ class Sala extends DAO
         $this->equipamientoDisponible = null;
         $this->estado = null;
         $this->foto = null;
-    }
+    }*/
     //METODOS ---------------------------------
     //MÉTODO PARA MOSTRAR LA SALA
-    public function mostrar()
+   /* public function mostrar()
     {
         echo "<tr>";
         echo "<td>" . $this->id . "</td>";
@@ -46,10 +46,10 @@ class Sala extends DAO
         echo "<td>" . $this->estado . "</td>";
         echo "<td>" . $this->foto . "</td>";
         echo "</tr>";
-    }
+    }*/
 
     //MÉTODO PARA INSERTAR LA SALA EN LA BASE DE DATOS
-    public function insertarSala(Sala $sala)
+    public function insertarSala($nombre, $capacidad, $ubicacion, $equipamientoDisponible, $estado, $fotoActual)
     {
        // try {
             $sql = 'INSERT INTO saladeconferencias (nombre, capacidad, ubicacion, equipamientoDisponible, estado, foto)
@@ -78,12 +78,12 @@ class Sala extends DAO
 
 
         $consulta = $this->con-> prepare($sql);
-        $consulta -> bindValue(':nombre', $sala -> nombre);
-        $consulta -> bindValue(':capacidad', $sala -> capacidad);
-        $consulta -> bindValue(':ubicacion', $sala -> ubicacion);
-        $consulta -> bindValue(':equipamientoDisponible', $sala -> equipamientoDisponible);
-        $consulta -> bindValue(':estado', $sala -> estado);
-        $consulta -> bindValue(':foto', $sala -> foto);
+        $consulta -> bindValue(':nombre', $nombre);
+        $consulta -> bindValue(':capacidad', $capacidad);
+        $consulta -> bindValue(':ubicacion', $ubicacion);
+        $consulta -> bindValue(':equipamientoDisponible', $equipamientoDisponible);
+        $consulta -> bindValue(':estado', $estado);
+        $consulta -> bindValue(':foto', $fotoActual);
 
         $consulta ->execute();
 

@@ -23,6 +23,7 @@ setlocale(LC_TIME, 'es_ES.UTF-8','esp');
 
     $usuario = new Usuario();
     $dato = new Datos();
+    $sala = new Sala();
 
     session_start();
     if (isset($_SESSION['usuario'])){

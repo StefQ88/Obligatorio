@@ -29,12 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (in_array($fotoExt, $formatosPermitidos)) {
                 $fotoActual = 'uploads/' . uniqid('', true) . '_' . $fotoNombre;
                 if (move_uploaded_file($fotoTmp, $fotoActual)) {
-                    $sala = new Sala($nombre, $capacidad, $ubicacion, $equipamientoDisponible, $estado, $fotoActual);
-                   // $salaDAO = new SalaDAO();
 
                     //---------------------------------------
                     //INSERTO EN LA BASE DE DATOS 
-                    $sala->insertarSala($sala) ;
+                    $sala->insertarSala($nombre, $capacidad, $ubicacion, $equipamientoDisponible, $estado, $fotoActual) ;
                         header('Location: index.php?exito=La sala fue registrada con éxito');
                         exit();
                     
