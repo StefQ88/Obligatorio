@@ -34,13 +34,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     //---------------------------------------
                     //INSERTO EN LA BASE DE DATOS 
-                    if ($sala->insertarSala($sala)) {
-                        header('Location: administrar_salas.php?exito=La sala fue registrada con éxito');
+                    $sala->insertarSala($sala) ;
+                        header('Location: index.php?exito=La sala fue registrada con éxito');
                         exit();
-                    } else {
-                        header('Location: ingresar_sala.php?error=Error al ingresar la sala.');
-                        exit();
-                    }
+                    
                 } else {
                     header('Location: ingresar_sala.php?error=Error al mover el archivo de imagen.');
                     exit();

@@ -1,7 +1,5 @@
 <?php
 
-require_once '../class/DAO.php';
-
 class Sala extends DAO
 {
     private $id;
@@ -23,74 +21,7 @@ class Sala extends DAO
         $this->estado = $estado;
         $this->foto = $foto;
     }
-    //GETTERS --------------------------------
-    public function getId()
-    {
-        return $this->id;
-    }
-    public function getNombre()
-    {
-        return $this->nombre;
-    }
-    public function getCapacidad()
-    {
-        return $this->capacidad;
-    }
-    public function getUbicacion()
-    {
-        return $this->ubicacion;
-    }
-    public function getEquipamientoDisponible()
-    {
-        return $this->equipamientoDisponible;
-    }
-    public function getEstado()
-    {
-        return $this->estado;
-    }
-    public function getFoto()
-    {
-        return $this->foto;
-    }
-    //SETTERS --------------------------------
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-    public function setNombre($nombre)
-    {
-        $this->nombre = $nombre;
-    }
-    public function setCapacidad($capacidad)
-    {
-        $this->capacidad = $capacidad;
-    }
-    public function setUbicacion($ubicacion)
-    {
-        $this->ubicacion = $ubicacion;
-    }
-    public function setEquipamientoDisponible($equipamientoDisponible)
-    {
-        $this->equipamientoDisponible = $equipamientoDisponible;
-    }
-    public function setEstado($estado)
-    {
-        $this->estado = $estado;
-    }
-    public function setFoto($foto)
-    {
-        $this->foto = $foto;
-    }
-    //TOSTRING --------------------------------
-    public function toString()
-    {
-        return $this->id . "-" . $this->nombre . "-" . $this->capacidad . "-" . $this->ubicacion . "-" . $this->equipamientoDisponible . "-" . $this->estado . "-" . $this->foto;
-    }
-    //TOARRAY --------------------------------
-    public function toArray()
-    {
-        return array($this->id, $this->nombre, $this->capacidad, $this->ubicacion, $this->equipamientoDisponible, $this->estado, $this->foto);
-    }
+    
     //DESTRUCT --------------------------------
     public function __destruct()
     {
@@ -120,17 +51,17 @@ class Sala extends DAO
     //MÉTODO PARA INSERTAR LA SALA EN LA BASE DE DATOS
     public function insertarSala(Sala $sala)
     {
-        try {
+       // try {
             $sql = 'INSERT INTO saladeconferencias (nombre, capacidad, ubicacion, equipamientoDisponible, estado, foto)
                     VALUES (:nombre, :capacidad, :ubicacion, :equipamientoDisponible, :estado, :foto)';
 
-            $parametros = array(
-                ':nombre' => $sala->getNombre(),
-                ':capacidad' => $sala->getCapacidad(),
-                ':ubicacion' => $sala->getUbicacion(),
-                ':equipamientoDisponible' => $sala->getEquipamientoDisponible(),
-                ':estado' => $sala->getEstado(),
-                ':foto' => $sala->getFoto()
+            /*$parametros = array(
+                ':nombre' => $sala->nombre,
+                ':capacidad' => $sala->capacidad,
+                ':ubicacion' => $sala->ubicacion,
+                ':equipamientoDisponible' => $sala->equipamientoDisponible,
+                ':estado' => $sala->estado,
+                ':foto' => $sala->foto
             );
 
             $this->execute($sql, $parametros);
@@ -143,7 +74,20 @@ class Sala extends DAO
             }
         } catch (PDOException $ex) {
             return false; 
-        }
+        }*/
+
+
+        $consulta = $this->con-> prepare($sql);
+        $consulta -> bindValue(':nombre', $sala -> nombre);
+        $consulta -> bindValue(':capacidad', $sala -> capacidad);
+        $consulta -> bindValue(':ubicacion', $sala -> ubicacion);
+        $consulta -> bindValue(':equipamientoDisponible', $sala -> equipamientoDisponible);
+        $consulta -> bindValue(':estado', $sala -> estado);
+        $consulta -> bindValue(':foto', $sala -> foto);
+
+        $consulta ->execute();
+
+
     }
 
     //MÉTODO PARA VALIDAR DATOS
