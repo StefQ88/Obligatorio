@@ -93,10 +93,10 @@
                         $nombre = $row->nombre;
                         //echo "<td>".$idSala."</td>";
                         echo "<td><img src='img/$img' width='100' height='100'></td>";
-                        echo "<td>".$name."</td>";
+                        echo "<td>".$nombre."</td>";
                         echo "<td>".$horaInicio."</td>";
                         echo "<td>".$horaFin."</td>";
-                        echo "<td>".$nombre."</td>";
+                        echo "<td>".$name."</td>";
                         echo "<td>".$apellido."</td>";
                         echo "<td>".$ciEmpleado."</td>";
                                             
