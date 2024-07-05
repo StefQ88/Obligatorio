@@ -22,9 +22,7 @@
         }
 
         public function buscarDatos ($ciEmpleado) {
-           /* $i = 0;
-            $res = array();*/
-            // "SELECT * FROM datos WHERE ciEmpleado = '$ciEmpleado'"
+    
             $sql = "SELECT * FROM saladeconferencias sc, datos d WHERE d.IdSala = sc.id AND d.CiEmpleado = '$ciEmpleado';";
             $consulta = $this->con->query( $sql);
             $cantidadFilas = $consulta->rowCount();
@@ -44,7 +42,13 @@
                         $img = $row->foto;
                         $name = $row->nombre;
                         $capacidad = $row->capacidad;
-                        echo "<td><img src='img/$img' width='100' height='100'></td>";
+                        $idSala = $row->IdSala;
+                        //echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='uploads/$img' width='100' height='100'></a></div></td>";
+                        if (empty($img)){
+                            echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='uploads/default-pp.png' width='50%' height='50%'></a></div></td>";
+                        }else{
+                            echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='uploads/$img' width='50%' height='50%'></a></div></td>";
+                        }
                         echo "<td>".$name."</td>";
                         echo "<td>".$capacidad."</td>";
                         echo "<td>".$horaInicio."</td>";
@@ -60,20 +64,13 @@
 
 
         public function buscarDatos2 () {
-            /*Imagen de la sala de conferencias
- Nombre de la sala
- Capacidad de la sala
- Fecha y hora de inicio (Formato: DD-MM-YYYY HH)
- Fecha y hora de fin (Formato: DD-MM-YYYY HH)
- Nombre y Apellido del Empleado
- CI del Empleado*/
+            
             $sql = "SELECT * FROM saladeconferencias as sc, datos as d, usuarios as u WHERE d.IdSala = sc.id AND d.horaFIn >= date(now()) and u.tipoUsuario = 'empleado'";
             $consulta = $this->con->query( $sql);
             $cantidadFilas = $consulta->rowCount();
             if ($cantidadFilas > 0){
                 echo "<p align = center>El usuario tiene $cantidadFilas datos: </p>";
-                echo "<table width='60%' align='center' border='1'>";//crearTabla();
-                 //crearCabezal("id sala", "ci empleado", "hora de inicio", "hora de fin", "Imagen de la Sala", "Nombre de la Sala", "Capacidad de la Sala");
+                echo "<table width='60%' align='center' border='1'>";
                 echo "<th bgcolor='gray'>", "Imagen de la Sala", "</th>";
                 echo "<th bgcolor='gray'>", "Nombre de la Sala", "</th>";
                 echo "<th bgcolor='gray'>", "hora de inicio", "</th>";
@@ -81,9 +78,9 @@
                 echo "<th bgcolor='gray'>", "Nombre del Empleado", "</th>";
                 echo "<th bgcolor='gray'>", "Apellido del Empleado", "</th>";
                 echo "<th bgcolor='gray'>", "ci empleado", "</th>";
-                 while ($row = $consulta->fetch(PDO::FETCH_OBJ)){ //fecth(PDO::FETCH_OBJ /*$consulta->fetchAll(PDO::FETCH_ASSOC)*/)){
+                while ($row = $consulta->fetch(PDO::FETCH_OBJ)){
                     echo "<tr>";
-                        //$idSala = $row->IdSala;
+                        $idSala = $row->IdSala;
                         $ciEmpleado = $row->CiEmpleado;
                         $horaInicio = $row->horaInicio;
                         $horaFin = $row->horaFin;
@@ -91,12 +88,16 @@
                         $name = $row->primerNombre;
                         $apellido = $row->primerApellido;
                         $nombre = $row->nombre;
-                        //echo "<td>".$idSala."</td>";
-                        echo "<td><img src='img/$img' width='100' height='100'></td>";
-                        echo "<td>".$name."</td>";
+                        //echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='img/$img' width='100' height='100'></a></div></td>";
+                        if (empty($img)){
+                            echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='uploads/default-pp.png' width='50%' height='50%'></a></div></td>";
+                        }else{
+                            echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='uploads/$img' width='50%' height='50%'></a></div></td>";
+                        }
+                        echo "<td>".$nombre."</td>";
                         echo "<td>".$horaInicio."</td>";
                         echo "<td>".$horaFin."</td>";
-                        echo "<td>".$nombre."</td>";
+                        echo "<td>".$name."</td>";
                         echo "<td>".$apellido."</td>";
                         echo "<td>".$ciEmpleado."</td>";
                                             
@@ -104,7 +105,7 @@
                 }
                 echo "</table>";
             } else
-                echo "<p align = center>El empleado no tiene datos. </p>";
+                echo "<p align = center>No existen salas las cuales su hora de finalizacion sea mayor a la hora actual. </p>";
         }
     }
 ?>

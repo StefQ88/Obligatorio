@@ -98,4 +98,39 @@ class Sala extends DAO
         }
         return true;
     }
+
+    public function mostrarSala ($idSala) {
+        $sql = "SELECT * FROM saladeconferencias as sc, datos as d WHERE d.IdSala = '$idSala' AND d.IdSala = sc.id";
+        $consulta = $this->con->query( $sql);
+            
+            echo "<table width='60%' align='center' border='1'>";//crearTabla();
+            echo "<th bgcolor='gray'>", "Imagen de la Sala", "</th>";
+            echo "<th bgcolor='gray'>", "Nombre de la Sala", "</th>";
+            echo "<th bgcolor='gray'>", "Capacidad", "</th>";
+            echo "<th bgcolor='gray'>", "Equipamiento de la sala", "</th>";
+            echo "<th bgcolor='gray'>", "hora de inicio", "</th>";
+            echo "<th bgcolor='gray'>", "hora de fin", "</th>";
+            echo "<th bgcolor='gray'>", "Motivo de la reserva", "</th>";
+             while ($row = $consulta->fetch(PDO::FETCH_OBJ)){ //fecth(PDO::FETCH_OBJ /*$consulta->fetchAll(PDO::FETCH_ASSOC)*/)){
+                echo "<tr>";
+                    $horaInicio = $row->horaInicio;
+                    $horaFin = $row->horaFin;
+                    $img = $row->foto;
+                    $nombre = $row->nombre;
+                    $capacidad = $row->capacidad;
+                    $equipamientoDisponible = $row->equipamientoDisponible;
+                    $motivo = $row->motivo;
+                    
+                    echo "<td><img src='img/$img' width='100' height='100'></td>";
+                    echo "<td>".$nombre."</td>";
+                    echo "<td>".$capacidad."</td>";
+                    echo "<td>".$equipamientoDisponible."</td>";
+                    echo "<td>".$horaInicio."</td>";
+                    echo "<td>".$horaFin."</td>";
+                    echo "<td>".$motivo."</td>";
+                                        
+                echo "</tr>";
+            }
+            echo "</table>";
+    }
 }

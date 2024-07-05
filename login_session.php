@@ -22,7 +22,10 @@
             //}
             if (postParamAndSet('email', $email) && postParamAndSet('password', $password)){
                 if ($ciUser = $usuario->verficarDatos($email, $password)){
+                    //SETEO LA SESSION
                     $_SESSION['usuario'] = $usuario->get($ciUser);
+                    //SETEO LA COOKIE
+                    setcookie("tiempoSession", "activa", time() + (60 * 10)); //$_COOKIE['tiempoSession'];
                     $estado = $usuario->getEstado();
                     if ($estado == 0){
                         echo "<script> alert (\"El usuario ha sido deshabilitado.\"); </script>";
@@ -30,7 +33,7 @@
                         header('location: index.php');    
                     }	
                 }else{
-                    header('location: login.php?error=Cedula o Password incorrecta');
+                    header('location: login.php?error=Email o Password incorrecta');
                     exit();                        
                 }
             }

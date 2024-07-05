@@ -27,7 +27,14 @@ setlocale(LC_TIME, 'es_ES.UTF-8','esp');
 
     session_start();
     if (isset($_SESSION['usuario'])){
-        $_SESSION['usuario'] = $usuario->get($_SESSION['usuario']['ci']);
+        if(isset($_COOKIE['tiempoSession'])){
+            $_SESSION['usuario'] = $usuario->get($_SESSION['usuario']['ci']);
+        }else{
+            unset($_SESSION['usuario']);
+            //header("Location: login.php");
+            //echo "<script>alert('la session expiro');window.location.href='login.php'</script>";
+        }
+        
     }else{
         unset($_SESSION['usuario']);
     }
