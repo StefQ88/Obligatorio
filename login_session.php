@@ -25,7 +25,7 @@
                     //SETEO LA SESSION
                     $_SESSION['usuario'] = $usuario->get($ciUser);
                     //SETEO LA COOKIE
-                    setcookie("tiempoSession", "activa", time() + (60 * 1)); //$_COOKIE['tiempoSession'];
+                    setcookie("tiempoSession", "activa", time() + (60 * 10)); //$_COOKIE['tiempoSession'];
                     $estado = $usuario->getEstado();
                     if ($estado == 0){
                         echo "<script> alert (\"El usuario ha sido deshabilitado.\"); </script>";

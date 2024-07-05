@@ -32,7 +32,7 @@ setlocale(LC_TIME, 'es_ES.UTF-8','esp');
         }else{
             unset($_SESSION['usuario']);
             //header("Location: login.php");
-            echo "<script>alert('la session expiro');window.location.href='login.php'</script>";
+            //echo "<script>alert('la session expiro');window.location.href='login.php'</script>";
         }
         
     }else{
