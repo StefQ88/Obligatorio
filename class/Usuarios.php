@@ -37,6 +37,21 @@
             
             return isset($usuario['activo']) ? $usuario['activo'] : false;
         }  
+        public function existsUser($email, $ci) {
+            $sql = 'SELECT COUNT(*) FROM usuarios WHERE email = :email OR ci = :ci';
+            
+            $consulta = $this->con->prepare($sql);
+            
+            $consulta->bindValue(':email', $email);
+            $consulta->bindValue(':ci', $ci);
+
+            $consulta->execute();
+            
+            $resultado = $consulta->fetchColumn();
+            if ($resultado > 0)
+                return true;
+            else return false;
+        }
 
         public function insertUsuario($ci, $primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $fechaNacimiento, $email, $fotoPerfil, $password, $tipoUsuario){
             

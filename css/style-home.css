@@ -7,7 +7,7 @@
 
 body {
     min-height: 100hv;
-    background: url('../uploads/840_560.jpeg') center / cover;
+    background: url('../uploads/9155454.jpg') no-repeat;
     /*font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;*/
     
 }
@@ -74,7 +74,7 @@ thead th {
 }
 
 tbody tr:nth-child(even) {
-    background-color: #0000000b;
+    background-color: #f8f1f10b;
 }
 
 tbody tr {
@@ -132,6 +132,15 @@ nav ul{
 
 nav li{
     height: 50px;
+}
+
+.sidebar li img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 25px;
+    justify-content: center;
+    align-items: center;
 }
 
 nav a {

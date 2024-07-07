@@ -22,7 +22,7 @@
             <?php }?>
 
             <div class="input-box">
-                <input type="text" placeholder="Username" name="email" >
+                <input type="text" placeholder="email" name="email" >
                 <!--ICONO DE USUARIO -->
                 <!--<i class='bx bxs-user'></i>-->
                 <i class='bx bxs-user-circle' ></i>
@@ -44,7 +44,7 @@
             <button type="submit" name="Login" class="btn">Login</button>
 
             <div class="registro-link">
-                <p>¿No tengo cuenta? <a href="registro.html">Registrarse</a></p>
+                <p>¿No tengo cuenta? <a href="registro_page.php">Registrarse</a></p>
             </div>
         </form>
     </div>
