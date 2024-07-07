@@ -7,18 +7,147 @@
 
 body {
     min-height: 100hv;
-    background: url('../uploads/840_560.jpeg') center / cover;
+    background: url('../uploads/9155454.jpg') no-repeat;
     /*font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;*/
+    
     
 }
 
+.container{
+    max-width: 700px;
+    width: 50%;
+    margin: 0 auto;
+    backdrop-filter: blur(7px);
+    padding: 25px 30px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #fff;
+
+}
+.container .title{
+    font-size: 25px;
+    font-weight: 500;
+    position: relative;
+    margin-bottom: 530px;
+}
+.container .title::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 30px;
+    background: #9d18d1;
+}
+
+.content form .detalles-usuario{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0 12px 0;
+    align-items: center;
+    padding: 10px;
+    
+}
+form .detalles-usuario .input-box{
+    margin-bottom: 15px;
+    width: calc(100% / 2 - 20px);
+}
+form .input-box span.detalles{
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+.detalles-usuario .input-box input{
+    height: 45px;
+    width: 100%;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding-left: 15px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+}
+.detalles-usuario .input-box input:focus,
+.detalles-usuario .input-box input:valid{
+    border-color: #9d18d1;
+}
+form .tipoUsuario-detalles .tipo-titulo{
+    font-size: 20px;
+    font-weight: 500;
+    width: 100%;
+}
+form .button{
+    height: 45px;
+    margin: 35px 0;
+    
+}
+form .button input{
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #211f94, #9d18d1);
+}
+form .button input:hover{
+    background: linear-gradient(-135deg, #211f94, #9d18d1);
+}
+
+.input-box textarea {
+    height: 100px; 
+    width: 100%;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease; 
+}
+
+.input-box textarea:focus {
+    border-color: #9b59b6; /
+}
+
+.input-box textarea:focus + .detalles {
+    color: #9b59b6; 
+}
+
+
+.input-box select {
+    height: 45px;
+    width: 100%;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease; 
+}
+
+.input-box select:focus {
+    border-color: #9b59b6; 
+}
+
+.input-box select:focus + .detalles {
+    color: #9b59b6; 
+}
 td img {
     width: 36px;
     height: 36px;
     margin-right: .5rem;
     border-radius: 50%;
-
     vertical-align: middle;
+    align-self: center;
 }
 main.table {
     width: 75%;
@@ -61,6 +190,7 @@ table, th, td {
     border-collapse: collapse;
     padding: 1rem;
     text-align: left;
+    color: #f0f0f0;
 }
 
 
@@ -74,7 +204,7 @@ thead th {
 }
 
 tbody tr:nth-child(even) {
-    background-color: #0000000b;
+    background-color: #f8f1f10b;
 }
 
 tbody tr {
@@ -132,6 +262,24 @@ nav ul{
 
 nav li{
     height: 50px;
+}
+
+nav img{
+    width: 36px;
+    height: 36px;
+    margin-right: .5rem;
+    border-radius: 50%;
+    vertical-align: middle;
+    align-self: center;
+}
+
+.sidebar img{
+    width: 36px;
+    height: 36px;
+    margin-right: .5rem;
+    border-radius: 50%;
+    vertical-align: middle;
+    align-self: center;
 }
 
 nav a {

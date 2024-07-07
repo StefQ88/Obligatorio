@@ -12,7 +12,7 @@ body {
     align-items: center;
     height: 100vh;
     padding: 10px;
-    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    background: url('../uploads/9155454.jpg') no-repeat;
 }
 
 .container{

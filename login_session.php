@@ -8,18 +8,12 @@
         $email = $_POST['email'];
         $password = $_POST['password'];
         if (empty($email)){
-            header('location: login.php?error=CI is required');
+            header('location: login.php?error=email is required');
             exit();
         }else if (empty($password)){
             header('location: login.php?error=password is required');
             exit();
         }else{
-            // STATUS OK
-            /* if($fila['tipoUsuario'] == 'empleado'){
-                        header('location: home.php');*/
-                        //la otra manera de hacer esto es en un solo php guardar el tipo de usuario y de ahi depende de lo que muestro si muestro mas o menos   y me queda un solo index
-                    //}
-            //}
             if (postParamAndSet('email', $email) && postParamAndSet('password', $password)){
                 if ($ciUser = $usuario->verficarDatos($email, $password)){
                     //SETEO LA SESSION

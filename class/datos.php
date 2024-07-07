@@ -45,9 +45,9 @@
                         $idSala = $row->IdSala;
                         //echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='uploads/$img' width='100' height='100'></a></div></td>";
                         if (empty($img)){
-                            echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='uploads/default-pp.png' width='50%' height='50%'></a></div></td>";
+                            echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='uploads/default-pp.png' style='width: 70px'></a></div></td>";
                         }else{
-                            echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='uploads/$img' width='50%' height='50%'></a></div></td>";
+                            echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='uploads/$img' style='width: 70px'></a></div></td>";
                         }
                         echo "<td>".$name."</td>";
                         echo "<td>".$capacidad."</td>";
@@ -108,9 +108,9 @@
                                 $nombre = $row->nombre;
                                 //echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='img/$img' width='100' height='100'></a></div></td>";
                                 if (empty($img)){
-                                    echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='uploads/default-pp.png' width='50%' height='50%'></a></div></td>";
+                                    echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='uploads/default-pp.png'  style='width: 70px'></a></div></td>";
                                 }else{
-                                    echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='uploads/$img' width='50%' height='50%'></a></div></td>";
+                                    echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='uploads/$img' style='width: 70px'></a></div></td>";
                                 }
                                 echo "<td>".$nombre."</td>";
                                 echo "<td>".$horaInicio."</td>";
