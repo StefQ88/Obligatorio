@@ -129,5 +129,17 @@
             } else
                 echo "<p align = center>No existen salas las cuales su hora de finalizacion sea mayor a la hora actual. </p>";
         }
+
+      
+
+
+
+
+
+
+
+
+
+
     }
 ?>

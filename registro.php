@@ -27,8 +27,8 @@
                         $imgUploadPath = 'uploads/'.$newImgName;
                         move_uploaded_file($tmpName, $imgUploadPath);
 
-                        //---------------------------------------
-                        //INSERTO EN LA BASE DE DATOS 
+                            //---------------------------------------
+                            //INSERTO EN LA BASE DE DATOS 
                         $usuario->insertUsuario($CI, $primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $fechaNacimiento, $email, $newImgName, $password, $tipoUsuario);
                         header('location: login.php?exito=el usuario fue registrado con exito!');
 
