@@ -134,17 +134,29 @@ require_once "DAO.php";
 
         
 
-        public function obtenerhistorialReservas($ciEmpleado){
+        public function obtenerhistorialReservas($ciEmpleado, $esAdministrador){
 
-            $sql = "SELECT sc.foto, sc.nombre, d.IdSala, d.fechaReserva, d.horaInicio, d.horaFin
-            FROM saladeconferencias AS sc
-            JOIN datos AS d ON d.IdSala  = sc.id
-            JOIN usuarios As u ON d.CiEmpleado = u.ci
-            WHERE d.CiEmpleado = :ciEmpleado
-            ORDER BY d.fechaReserva DESC, d.horaFin DESC";
+            if($esAdministrador){
+                $sql = "SELECT sc.foto, sc.nombre, d.IdSala, d.fechaReserva, d.horaInicio, d.horaFin
+                        FROM saladeconferencias AS sc
+                        JOIN datos AS d ON d.IdSala  = sc.id
+                        JOIN usuarios As u ON d.CiEmpleado = u.ci
+                        WHERE d.CiEmpleado = :ciEmpleado 
+                        ORDER BY d.fechaReserva DESC, d.horaFin DESC";
+                $consulta = $this->con->prepare($sql);
+                $consulta->execute();
+            } else {
+
+                $sql = "SELECT sc.foto, sc.nombre, d.IdSala, d.fechaReserva, d.horaInicio, d.horaFin
+                FROM saladeconferencias AS sc
+                JOIN datos AS d ON d.IdSala  = sc.id
+                JOIN usuarios As u ON d.CiEmpleado = u.ci
+                WHERE d.CiEmpleado = :ciEmpleado 
+                ORDER BY d.fechaReserva DESC, d.horaFin DESC";
     
-            $consulta = $this->con->prepare($sql); //preparamos la consulta
-            $consulta ->execute(['ciEmpleado' => $ciEmpleado]); //se ejecuta
+                $consulta = $this->con->prepare($sql); //preparamos la consulta
+                $consulta ->execute(['ciEmpleado' => $ciEmpleado]); //se ejecuta
+            }
 
             return $consulta->fetchAll(PDO::FETCH_ASSOC);
           }
@@ -158,8 +170,8 @@ require_once "DAO.php";
             return $foto;
         }*/
 
-        public function mostrarHistorialReservas($ciEmpleado){
-            $reservas = $this->obtenerhistorialReservas($ciEmpleado);
+        public function mostrarHistorialReservas($ciEmpleado,$esAdministrador){
+            $reservas = $this->obtenerhistorialReservas($ciEmpleado,$esAdministrador);
 
             if($reservas){
                 echo "<p align = center>El usuario tiene " . count($reservas). " reservas: </p>";
@@ -172,12 +184,13 @@ require_once "DAO.php";
                 echo "<table>";
                     echo "<thead>";
                         echo "<tr>";
-                            echo "<th>" . "Imagen de la Sala" . "</th>";
-                            echo "<th>" . "Nombre de la Sala" . "</th>";
-                            echo "<th>" . "Fecha y Hora de Inicio" . "</th>";
-                            echo "<th>" . "Fecha y Hora de Fin" . "</th>";
-                            echo "<th>" . "Estado" . "</th>";
-                            echo "<th>" . "Link a Detalle" . "</th>";
+                            echo "<th>Imagen de la Sala</th>";
+                            echo "<th>Nombre de la Sala</th>";
+                            echo "<th>Fecha y Hora de Inicio</th>";
+                            echo "<th>Fecha y Hora de Fin</th>";
+                            echo "<th>Estado</th>";
+                            echo "<th>Nombre y Apellido del Empleado</th>";
+                            echo "<th>Link a Detalle</th>";
                         echo "</tr>";
                     echo "</thead>";
                 echo "</tbody>";

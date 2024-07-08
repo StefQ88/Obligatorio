@@ -44,7 +44,7 @@ if (isset($_SESSION['usuario'])) {
             <li><a href="#">Asignacion de reservas</a></li>
             <li><a href="ingresar_sala.php">Ingreso de salas</a></li>
             <?php } ?>
-            <li><a href="#">Historial de reservas</a></li>
+            <li><a href="historial_reservas.php">Historial de reservas</a></li>
             <li><a href="perfil.php">Perfil</a></li>
             <li><a href="logout.php">Salir</a></li>
         </ul>
