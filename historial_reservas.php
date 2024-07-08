@@ -4,6 +4,7 @@ if (isset($_SESSION['usuario'])) {
     $user = $_SESSION['usuario'];
     $datos = new datos();
     $ciEmpleado = $user['ci']; // Asumiendo que el CI del empleado está en la sesión
+    $esAdministrador = ($_SESSION['usuario']['tipoUsuario']== 'administrador')
 ?>
 <!DOCTYPE html>
 <html>
@@ -52,7 +53,7 @@ if (isset($_SESSION['usuario'])) {
         </ul>
     </nav>
 <?php 
-$datos->mostrarHistorialReservas($ciEmpleado);
+$datos->mostrarHistorialReservas($ciEmpleado,$esAdministrador);
 ?>
 
 

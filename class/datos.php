@@ -61,7 +61,7 @@ require_once "DAO.php";
                 }
                 echo "</table>";
             } else
-            echo "<p align = center>El empleado no tiene datos. </p>";
+            echo "<p align = center color= #fff>El empleado no tiene datos. </p>";
         }
 
 
@@ -72,14 +72,7 @@ require_once "DAO.php";
             $cantidadFilas = $consulta->rowCount();
             if ($cantidadFilas > 0){
                 echo "<p align = center>El usuario tiene $cantidadFilas datos: </p>";
-                /*echo "<table width='60%' align='center' border='1'>";
-                echo "<th bgcolor='gray'>", "Imagen de la Sala", "</th>";
-                echo "<th bgcolor='gray'>", "Nombre de la Sala", "</th>";
-                echo "<th bgcolor='gray'>", "hora de inicio", "</th>";
-                echo "<th bgcolor='gray'>", "hora de fin", "</th>";
-                echo "<th bgcolor='gray'>", "Nombre del Empleado", "</th>";
-                echo "<th bgcolor='gray'>", "Apellido del Empleado", "</th>";
-                echo "<th bgcolor='gray'>", "ci empleado", "</th>";*/
+
                 echo"<main class='table' id='customers_table'>";
                 echo"<section class='table__header'>";
                     echo"<h1>Tabla de Salas</h1>";
@@ -129,7 +122,7 @@ require_once "DAO.php";
                 echo "</main>";
                
             } else
-                echo "<p align = center>No existen salas las cuales su hora de finalizacion sea mayor a la hora actual. </p>";
+                echo "<p align = center color=#fff>No existen salas las cuales su hora de finalizacion sea mayor a la hora actual. </p>";
         }
 
         
@@ -137,17 +130,16 @@ require_once "DAO.php";
         public function obtenerhistorialReservas($ciEmpleado, $esAdministrador){
 
             if($esAdministrador){
-                $sql = "SELECT sc.foto, sc.nombre, d.IdSala, d.fechaReserva, d.horaInicio, d.horaFin
+                $sql = "SELECT *
                         FROM saladeconferencias AS sc
                         JOIN datos AS d ON d.IdSala  = sc.id
                         JOIN usuarios As u ON d.CiEmpleado = u.ci
-                        WHERE d.CiEmpleado = :ciEmpleado 
                         ORDER BY d.fechaReserva DESC, d.horaFin DESC";
                 $consulta = $this->con->prepare($sql);
                 $consulta->execute();
             } else {
 
-                $sql = "SELECT sc.foto, sc.nombre, d.IdSala, d.fechaReserva, d.horaInicio, d.horaFin
+                $sql = "SELECT *
                 FROM saladeconferencias AS sc
                 JOIN datos AS d ON d.IdSala  = sc.id
                 JOIN usuarios As u ON d.CiEmpleado = u.ci
@@ -200,18 +192,28 @@ require_once "DAO.php";
                     $idSala = $reserva['IdSala'];
                     $fotoSala = $reserva['foto'];
                     $nombreSala = $reserva['nombre'];
-                    $fechaInicio = date('d-m-Y H:i', strtotime($reserva['fechaReserva'] . ' ' . $reserva['horaInicio']));
-                    $fechaFin = date('d-m-Y H:i', strtotime($reserva['fechaReserva'] . ' ' . $reserva['horaFin']));
+                    $nombreEmpleado = $reserva['primerNombre'] . ' ' . $reserva['primerApellido'];
+                    $fechaHoraInicio = date('d-m-Y H:i', strtotime($reserva['fechaReserva'] . ' ' . $reserva['horaInicio']));
+                    $fechaHoraFin = date('d-m-Y H:i', strtotime($reserva['fechaReserva'] . ' ' . $reserva['horaFin']));
                     //$estado = (strtotime($reserva['horaFin']) > time()) ? 'Activa' : 'Finalizada';
                    // $estadoColor = ($estado === 'Activa') ? 'green' : 'red';
 
-                   if (strtotime($reserva['fechaReserva'] . ' ' . $reserva['horaFin']) > time()) {
+                   //$timestampInicio = strtotime($fechaHoraInicio);
+                   //$timestampFin = strtotime($fechaHoraFin);
+
+                   //date_default_timezone_set('Etc/GMT+3');
+                   // $fecha_y_hora = date("Y-m-d H:i");
+
+                   if ($fechaHoraFin < time()) {
                     $estado = 'Activa';
                     $estadoColor = 'green';
                     } else {
                     $estado = 'Finalizada';
                     $estadoColor = 'red';
                     }
+
+                   //echo time();
+
 
                     echo "<tr>";
                     if (empty($fotoSala)) {
@@ -220,9 +222,10 @@ require_once "DAO.php";
                         echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='$fotoSala' style='width: 70px'></a></div></td>";
                     }
                     echo "<td>{$nombreSala}</td>";
-                    echo "<td>{$fechaInicio}</td>";
-                    echo "<td>{$fechaFin}</td>";
+                    echo "<td>{$fechaHoraInicio}</td>";
+                    echo "<td>{$fechaHoraFin}</td>";
                     echo "<td style='color: {$estadoColor}'>{$estado}</td>";
+                    echo "<td>{$nombreEmpleado}</td>";
                     echo "<td><a href='detalleReserva.php?id={$idSala}'>Ver Detalle</a></td>";
                     echo "</tr>";
                  }

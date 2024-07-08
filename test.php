@@ -49,8 +49,8 @@ foreach ($reservas as $reserva) {
     $fechaInicioFormateada = date('d-m-Y H:i', $timestampInicio);
 
     echo "Fecha de inicio formateada: " . $fechaInicioFormateada . "\n";
-}
-*/
+}*/
+
 
 /*
 $idSala = 2;
@@ -64,8 +64,15 @@ if($fotoSala){
 }
     */
 
-    $ciEmpleado = '13246578'; 
-    $datos->mostrarHistorialReservas($ciEmpleado);
+    $ciEmpleado = '23456789'; 
+    $esAdministrador = false;
+    echo "<h2>Historial de reservas como empleado</h2>";
+    $datos->mostrarHistorialReservas($ciEmpleado,$esAdministrador);
+
+
+    $esAdministrador = true;
+    echo "<h2>Historial de reservas como empleado</h2>";
+    $datos->mostrarHistorialReservas($ciEmpleado,$esAdministrador);
 
 
 
