@@ -2,52 +2,6 @@
 
 class Sala extends DAO
 {
-  /*  public $id;
-    public $nombre;
-    public $capacidad;
-    public $ubicacion;
-    public $equipamientoDisponible;
-    public $estado;
-    public $foto;*/
-   /* //CONSTRUCTOR --------------------------------
-    public function __construct($nombre, $capacidad, $ubicacion, $equipamientoDisponible, $estado, $foto)
-    {
-        
-        // $this->id=$id;
-        $this->nombre = $nombre;
-        $this->capacidad = $capacidad;
-        $this->ubicacion = $ubicacion;
-        $this->equipamientoDisponible = $equipamientoDisponible;
-        $this->estado = $estado;
-        $this->foto = $foto;
-    }
-    
-    //DESTRUCT --------------------------------
-    public function __destruct()
-    {
-        $this->id = null;
-        $this->nombre = null;
-        $this->capacidad = null;
-        $this->ubicacion = null;
-        $this->equipamientoDisponible = null;
-        $this->estado = null;
-        $this->foto = null;
-    }*/
-    //METODOS ---------------------------------
-    //MÉTODO PARA MOSTRAR LA SALA
-   /* public function mostrar()
-    {
-        echo "<tr>";
-        echo "<td>" . $this->id . "</td>";
-        echo "<td>" . $this->nombre . "</td>";
-        echo "<td>" . $this->capacidad . "</td>";
-        echo "<td>" . $this->ubicacion . "</td>";
-        echo "<td>" . $this->equipamientoDisponible . "</td>";
-        echo "<td>" . $this->estado . "</td>";
-        echo "<td>" . $this->foto . "</td>";
-        echo "</tr>";
-    }*/
-
     //MÉTODO PARA INSERTAR LA SALA EN LA BASE DE DATOS
     public function insertarSala($nombre, $capacidad, $ubicacion, $equipamientoDisponible, $estado, $fotoActual)
     {
@@ -133,4 +87,47 @@ class Sala extends DAO
             }
             echo "</table>";
     }
+
+    function getHistorialReservas(/*$db*/) {
+    $sql = "
+        SELECT 
+            r.IdSala,
+            r.fechaReserva,
+            r.horaInicio,
+            r.horaFin,
+            r.motivo,
+            r.estado,
+            s.nombre AS nombreSala,
+            s.foto AS fotoSala,
+            s.capacidad,
+            u.primerNombre AS nombreEmpleado,
+            u.ci AS ciEmpleado
+        FROM datos r
+        JOIN saladeconferencias s ON r.IdSala = s.id
+        JOIN usuarios u ON r.CiEmpleado = u.ci
+    ";
+
+    $result = /*$db*/$this->con->query($sql);
+    return $result->fetchAll();//->fetch_all(MYSQLI_ASSOC);
 }
+function algo (){
+    $historial = $this->getHistorialReservas(/*$db*/);
+
+foreach ($historial as $reserva) {
+    $estado = (strtotime($reserva['horaFin']) >= time()) ? 'Activa' : 'Finalizada';
+    echo "<tr class='{$estado}'>";
+    echo "<td><img src='{$reserva['fotoSala']}' alt='Sala' /></td>";
+    echo "<td>{$reserva['nombreSala']}</td>";
+    echo "<td>" . date("d-m-Y H:i", strtotime($reserva['horaInicio'])) . "</td>";
+    echo "<td>" . date("d-m-Y H:i", strtotime($reserva['horaFin'])) . "</td>";
+    echo "<td>{$reserva['nombreEmpleado']}</td>";
+    echo "<td>{$reserva['ciEmpleado']}</td>";
+    echo "<td><a href='detalle_reserva.php?id={$reserva['IdSala']}'>Detalle</a></td>";
+    echo "</tr>";
+}
+}
+
+
+}
+
+?>

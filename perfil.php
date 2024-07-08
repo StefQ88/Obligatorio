@@ -101,7 +101,7 @@
                 <input type="email" class="form-control" name="email"
                 value="<?php echo $_SESSION['usuario']['email']?>">
             </div>
-                
+    
             <div class="mb-3">
             <label class="form-label">Foto Perfil</label>
             <input type="file" class="form-control" name="fotoPerfil">
