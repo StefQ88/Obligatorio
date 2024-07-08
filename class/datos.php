@@ -146,21 +146,12 @@ require_once "DAO.php";
                 WHERE d.CiEmpleado = :ciEmpleado 
                 ORDER BY d.fechaReserva DESC, d.horaFin DESC";
     
-                $consulta = $this->con->prepare($sql); //preparamos la consulta
-                $consulta ->execute(['ciEmpleado' => $ciEmpleado]); //se ejecuta
+                $consulta = $this->con->prepare($sql); 
+                $consulta ->execute(['ciEmpleado' => $ciEmpleado]); 
             }
 
             return $consulta->fetchAll(PDO::FETCH_ASSOC);
           }
-
-       /* public function obtenerFotoSala($idSala){
-            $sql = "SELECT foto FROM saladeconferencias WHERE id = :idSala";
-            $consulta = $this->con->prepare($sql);
-            $consulta->execute(['idSala' => $idSala]);
-            $foto = $consulta->fetchColumn();
-            
-            return $foto;
-        }*/
 
         public function mostrarHistorialReservas($ciEmpleado,$esAdministrador){
             $reservas = $this->obtenerhistorialReservas($ciEmpleado,$esAdministrador);
