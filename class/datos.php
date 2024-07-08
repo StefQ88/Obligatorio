@@ -144,8 +144,8 @@ require_once "DAO.php";
                 WHERE d.CiEmpleado = :ciEmpleado 
                 ORDER BY d.fechaReserva DESC, d.horaFin DESC";
     
-                $consulta = $this->con->prepare($sql); //preparamos la consulta
-                $consulta ->execute(['ciEmpleado' => $ciEmpleado]); //se ejecuta
+                $consulta = $this->con->prepare($sql); 
+                $consulta ->execute(['ciEmpleado' => $ciEmpleado]); 
             }
 
             return $consulta->fetchAll(PDO::FETCH_ASSOC);
