@@ -125,8 +125,6 @@ require_once "DAO.php";
                 echo "<p align = center color=#fff>No existen salas las cuales su hora de finalizacion sea mayor a la hora actual. </p>";
         }
 
-        
-
         public function obtenerhistorialReservas($ciEmpleado, $esAdministrador){
 
             if($esAdministrador){
@@ -151,8 +149,7 @@ require_once "DAO.php";
             }
 
             return $consulta->fetchAll(PDO::FETCH_ASSOC);
-          }
-
+        }
         public function mostrarHistorialReservas($ciEmpleado,$esAdministrador){
             $reservas = $this->obtenerhistorialReservas($ciEmpleado,$esAdministrador);
 
@@ -229,5 +226,34 @@ require_once "DAO.php";
                     echo "<p align='center'>No se encontraron reservas para el empleado con CI: {$ciEmpleado}</p>";
                 }
         }
+
+        
+    public function validarFechas($fechaInicio, $fechaFin) {
+        return strtotime($fechaInicio) < strtotime($fechaFin);
+    }
+
+    public function verificarDisponibilidad($salaId, $fechaInicio, $fechaFin) {
+        $query = "SELECT * FROM saladeconferencias as sc JOIN datos as d WHERE d.IdSala = sc.id AND ((d.horaInicio < ? AND horaFin > ?) OR (horaInicio < ? AND horaFin > ?))";
+        $stmt = $this->con->prepare($query);
+        $result = $stmt->rowCount();
+
+        return $result === 0;
+    }
+
+    public function crearReserva($salaId, $usuarioId, $fechaInicio, $fechaFin) {
+        $query = "INSERT INTO datos (IdSala, CiEmpleado, fechaReserva, horaInicio, horaFin) 
+        VALUES (:IdSala, :CiEmpleado, :fechaReserva, :horaInicio, :horaFin)";
+        $stmt = $this->con->prepare($query);
+        $stmt->bindValue(':IdSala', $salaId);
+        $stmt->bindValue(':CiEmpleado', $usuarioId);
+        $stmt->bindValue(':fechaReserva', $fechaInicio);
+        $stmt->bindValue(':horaInicio', $fechaInicio);
+        $stmt->bindValue(':horaFin', $fechaFin);
+        $sql = "UPDATE `saladeconferencias` SET `estado` = 'no_disponible' WHERE `id` = :idSala";
+        $conexion = $this->con->prepare($sql);
+        $conexion->bindValue(':idSala', $salaId);
+        $conexion->execute();
+        return $stmt->execute();
+    }
     }
 ?>

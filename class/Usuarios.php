@@ -92,6 +92,12 @@
 
             $consulta->execute();
         }
+        public function listarUsuarios() {
+            $result = $this->con->query("SELECT id_usuario, primerNombre, primerApellido  FROM usuarios WHERE tipoUsuario = 'empleado'");
+            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                echo "<option value=\"{$row['id_usuario']}\">{$row['primerNombre']} {$row['primerApellido']}</option>";
+            }
+        }
 
     }
 ?>
