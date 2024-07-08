@@ -251,14 +251,22 @@ class datos extends DAO
         return strtotime($fechaInicio) < strtotime($fechaFin);
     }
 
+<<<<<<< HEAD
     public function verificarDisponibilidad($salaId, $fechaInicio, $fechaFin)
     {
         $query = "SELECT * FROM saladeconferencias as sc JOIN datos as d WHERE d.IdSala = sc.id AND ((d.horaInicio < ? AND horaFin > ?) OR (horaInicio < ? AND horaFin > ?))";
+=======
+    /*public function verificarDisponibilidad($salaId) {
+        //$query = "SELECT * FROM saladeconferencias as sc, datos as d WHERE d.IdSala = sc.id AND sc.id = '$salaId' AND((d.horaInicio < '$fechaInicio' AND horaFin > ''$fechaFin') OR (horaInicio < '$fechaInicio' AND horaFin > '$fechaFin'))";
+        $query = "SELECT * FROM saladeconferencias as sc WHERE sc.estado = 'disponible'";// AND sc.id = '$salaId'";
+>>>>>>> cf27ecefb34c8f8e33ebb39907fb48316be6c8df
         $stmt = $this->con->prepare($query);
         $result = $stmt->rowCount();
 
-        return $result === 0;
-    }
+        if ($result === 0)
+            return false;
+        else return true;
+    }*/
 
     public function crearReserva($salaId, $usuarioId, $fechaReserva, $fechaInicio, $fechaFin)
     {
