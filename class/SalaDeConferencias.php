@@ -121,7 +121,7 @@ class Sala extends DAO
                     $equipamientoDisponible = $row->equipamientoDisponible;
                     $motivo = $row->motivo;
                     
-                    echo "<td><img src='img/$img' width='100' height='100'></td>";
+                    echo "<td><img src='$img' width='100' height='100'></td>";
                     echo "<td>".$nombre."</td>";
                     echo "<td>".$capacidad."</td>";
                     echo "<td>".$equipamientoDisponible."</td>";

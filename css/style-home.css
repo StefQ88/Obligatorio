@@ -13,6 +13,25 @@ body {
     
 }
 
+.w-450 {
+	width: 450px;
+}
+.vh-100 {
+	min-height: 100vh;
+}
+.w-350 {
+	width: 350px;
+}
+
+.form-label {
+    color: #f0f0f0;
+}
+
+form .btn-primary {
+    background: linear-gradient(-135deg, #211f94, #9d18d1);
+}
+
+
 .container{
     max-width: 700px;
     width: 50%;
