@@ -71,7 +71,7 @@ if($fotoSala){
 
 
     $esAdministrador = true;
-    echo "<h2>Historial de reservas como empleado</h2>";
+    echo "<h2>Historial de reservas como administrador</h2>";
     $datos->mostrarHistorialReservas($ciEmpleado,$esAdministrador);
 
 
