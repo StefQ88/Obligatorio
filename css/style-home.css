@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -9,18 +9,20 @@ body {
     min-height: 100hv;
     background: url('../uploads/9155454.jpg') no-repeat;
     /*font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;*/
-    
-    
+
+
 }
 
 .w-450 {
-	width: 450px;
+    width: 450px;
 }
+
 .vh-100 {
-	min-height: 100vh;
+    min-height: 100vh;
 }
+
 .w-350 {
-	width: 350px;
+    width: 350px;
 }
 
 .form-label {
@@ -32,7 +34,7 @@ form .btn-primary {
 }
 
 
-.container{
+.container {
     max-width: 700px;
     width: 50%;
     margin: 0 auto;
@@ -46,13 +48,15 @@ form .btn-primary {
     color: #fff;
 
 }
-.container .title{
+
+.container .title {
     font-size: 25px;
     font-weight: 500;
     position: relative;
     margin-bottom: 530px;
 }
-.container .title::before{
+
+.container .title::before {
     content: '';
     position: absolute;
     left: 0;
@@ -62,25 +66,28 @@ form .btn-primary {
     background: #9d18d1;
 }
 
-.content form .detalles-usuario{
+.content form .detalles-usuario {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     margin: 20px 0 12px 0;
     align-items: center;
     padding: 10px;
-    
+
 }
-form .detalles-usuario .input-box{
+
+form .detalles-usuario .input-box {
     margin-bottom: 15px;
     width: calc(100% / 2 - 20px);
 }
-form .input-box span.detalles{
+
+form .input-box span.detalles {
     display: block;
     font-weight: 500;
     margin-bottom: 5px;
 }
-.detalles-usuario .input-box input{
+
+.detalles-usuario .input-box input {
     height: 45px;
     width: 100%;
     outline: none;
@@ -91,21 +98,25 @@ form .input-box span.detalles{
     border-bottom-width: 2px;
     transition: all 0.3s ease;
 }
+
 .detalles-usuario .input-box input:focus,
-.detalles-usuario .input-box input:valid{
+.detalles-usuario .input-box input:valid {
     border-color: #9d18d1;
 }
-form .tipoUsuario-detalles .tipo-titulo{
+
+form .tipoUsuario-detalles .tipo-titulo {
     font-size: 20px;
     font-weight: 500;
     width: 100%;
 }
-form .button{
+
+form .button {
     height: 45px;
     margin: 35px 0;
-    
+
 }
-form .button input{
+
+form .button input {
     height: 100%;
     width: 100%;
     border-radius: 5px;
@@ -118,27 +129,28 @@ form .button input{
     transition: all 0.3s ease;
     background: linear-gradient(135deg, #211f94, #9d18d1);
 }
-form .button input:hover{
+
+form .button input:hover {
     background: linear-gradient(-135deg, #211f94, #9d18d1);
 }
 
 .input-box textarea {
-    height: 100px; 
+    height: 100px;
     width: 100%;
     outline: none;
     font-size: 16px;
     border-radius: 5px;
     padding: 10px;
     border: 1px solid #ccc;
-    transition: border-color 0.3s ease; 
+    transition: border-color 0.3s ease;
 }
 
 .input-box textarea:focus {
-    border-color: #9b59b6; /
+    border-color: #9b59b6;/
 }
 
-.input-box textarea:focus + .detalles {
-    color: #9b59b6; 
+.input-box textarea:focus+.detalles {
+    color: #9b59b6;
 }
 
 
@@ -150,16 +162,17 @@ form .button input:hover{
     border-radius: 5px;
     padding: 10px;
     border: 1px solid #ccc;
-    transition: border-color 0.3s ease; 
+    transition: border-color 0.3s ease;
 }
 
 .input-box select:focus {
-    border-color: #9b59b6; 
+    border-color: #9b59b6;
 }
 
-.input-box select:focus + .detalles {
-    color: #9b59b6; 
+.input-box select:focus+.detalles {
+    color: #9b59b6;
 }
+
 td img {
     width: 36px;
     height: 36px;
@@ -168,6 +181,7 @@ td img {
     vertical-align: middle;
     align-self: center;
 }
+
 main.table {
     width: 75%;
     height: 100hv;
@@ -178,7 +192,7 @@ main.table {
     box-shadow: 0 .4rem .8rem #0005;
     border-radius: .8rem;
     overflow: hidden;
-    
+
 }
 
 .table_header {
@@ -192,7 +206,7 @@ main.table {
     align-items: center;
 }
 
-.table_body{
+.table_body {
     width: 95%;
     max-height: calc(89% - 1.6rem);
     background-color: #fffb;
@@ -201,11 +215,14 @@ main.table {
     overflow: auto;
     overflow: overlay;
 }
+
 table {
     width: 100%;
 }
 
-table, th, td {
+table,
+th,
+td {
     border-collapse: collapse;
     padding: 1rem;
     text-align: left;
@@ -264,14 +281,17 @@ thead th:hover {
     color: #a788c7;
 }
 
-nav{
-    
-    background: rgba(255, 255, 255, 0.5); /* Color blanco con transparencia */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
-    z-index: 1000; /* Asegura que la navbar esté encima de otros elementos */
+nav {
+
+    background: rgba(255, 255, 255, 0.5);
+    /* Color blanco con transparencia */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Sombra ligera */
+    z-index: 1000;
+    /* Asegura que la navbar esté encima de otros elementos */
 }
 
-nav ul{
+nav ul {
     width: 100%;
     list-style: none;
     display: flex;
@@ -279,11 +299,11 @@ nav ul{
     align-items: center;
 }
 
-nav li{
+nav li {
     height: 50px;
 }
 
-nav img{
+nav img {
     width: 36px;
     height: 36px;
     margin-right: .5rem;
@@ -292,7 +312,7 @@ nav img{
     align-self: center;
 }
 
-.sidebar img{
+.sidebar img {
     width: 36px;
     height: 36px;
     margin-right: .5rem;
@@ -310,7 +330,7 @@ nav a {
     color: black;
 }
 
-nav a:hover{
+nav a:hover {
     background-color: #f0f0f0;
 }
 
@@ -318,7 +338,7 @@ nav li:first-child {
     margin-right: auto;
 }
 
-.sidebar{
+.sidebar {
     position: fixed;
     top: 0;
     right: 0;
@@ -333,11 +353,11 @@ nav li:first-child {
     justify-content: flex-start;
 }
 
-.sidebar li{
+.sidebar li {
     width: 100%;
 }
 
-.sidebar a{
+.sidebar a {
     width: 100%;
 }
 
