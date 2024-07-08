@@ -57,7 +57,7 @@ class Sala extends DAO
         $sql = "SELECT * FROM saladeconferencias as sc, datos as d WHERE d.IdSala = '$idSala' AND d.IdSala = sc.id";
         $consulta = $this->con->query( $sql);
             
-            echo "<table width='60%' align='center' border='1'>";//crearTabla();
+            echo "<table width='60%' align='center' border='0'>";//crearTabla();
             echo "<th bgcolor='gray'>", "Imagen de la Sala", "</th>";
             echo "<th bgcolor='gray'>", "Nombre de la Sala", "</th>";
             echo "<th bgcolor='gray'>", "Capacidad", "</th>";
@@ -75,7 +75,7 @@ class Sala extends DAO
                     $equipamientoDisponible = $row->equipamientoDisponible;
                     $motivo = $row->motivo;
                     
-                    echo "<td><img src='$img' width='100' height='100'></td>";
+                    echo "<td><img src='$img' ></td>";
                     echo "<td>".$nombre."</td>";
                     echo "<td>".$capacidad."</td>";
                     echo "<td>".$equipamientoDisponible."</td>";
@@ -88,7 +88,14 @@ class Sala extends DAO
             echo "</table>";
     }
 
-    function getHistorialReservas(/*$db*/) {
+    public function listarSalas() {
+        $result = $this->con->query("SELECT id, nombre FROM saladeconferencias WHERE estado = 'disponible'");
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            echo "<option value=\"{$row['id']}\">{$row['nombre']}</option>";
+        }
+    }
+
+/*    function getHistorialReservas($db) {
     $sql = "
         SELECT 
             r.IdSala,
@@ -107,11 +114,11 @@ class Sala extends DAO
         JOIN usuarios u ON r.CiEmpleado = u.ci
     ";
 
-    $result = /*$db*/$this->con->query($sql);
+    $result = **$db$this->con->query($sql);
     return $result->fetchAll();//->fetch_all(MYSQLI_ASSOC);
 }
 function algo (){
-    $historial = $this->getHistorialReservas(/*$db*/);
+    $historial = $this->getHistorialReservas(/*$db);
 
 foreach ($historial as $reserva) {
     $estado = (strtotime($reserva['horaFin']) >= time()) ? 'Activa' : 'Finalizada';
@@ -125,7 +132,7 @@ foreach ($historial as $reserva) {
     echo "<td><a href='detalle_reserva.php?id={$reserva['IdSala']}'>Detalle</a></td>";
     echo "</tr>";
 }
-}
+}*/
 
 
 }
