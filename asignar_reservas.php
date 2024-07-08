@@ -62,7 +62,12 @@
         </ul>
     </nav>
   
-
+    <?php
+                if (isset($_GET['error'])){ ?>
+                    <p class="error"><?php echo $_GET['error']; }?></p>
+                <?php if (isset($_GET['exito'])){ ?>
+                    <p class="exito"><?php echo $_GET['exito']?></p> 
+            <?php }?>
     <div class="container">
         <h2>Asignar Reserva</h2>
         <form action="procesar_reserva.php" method="post">
