@@ -1,5 +1,6 @@
 <?php
 //require_once "./tablas.php";
+date_default_timezone_set('America/Montevideo'); // Ajusta la zona horaria según sea necesario
 require_once "DAO.php";
 
     class datos extends DAO{
@@ -203,25 +204,17 @@ require_once "DAO.php";
                     $nombreEmpleado = $reserva['primerNombre'] . ' ' . $reserva['primerApellido'];
                     $fechaHoraInicio = date('d-m-Y H:i', strtotime($reserva['fechaReserva'] . ' ' . $reserva['horaInicio']));
                     $fechaHoraFin = date('d-m-Y H:i', strtotime($reserva['fechaReserva'] . ' ' . $reserva['horaFin']));
-                    //$estado = (strtotime($reserva['horaFin']) > time()) ? 'Activa' : 'Finalizada';
-                   // $estadoColor = ($estado === 'Activa') ? 'green' : 'red';
+                    $fechaHoraFinTimestamp = strtotime($reserva['fechaReserva'] . ' ' . $reserva['horaFin']);
 
-                   //$timestampInicio = strtotime($fechaHoraInicio);
-                   //$timestampFin = strtotime($fechaHoraFin);
+                   $currentTimestamp = time();
 
-                   //date_default_timezone_set('Etc/GMT+3');
-                   // $fecha_y_hora = date("Y-m-d H:i");
-
-                   if ($fechaHoraFin < time()) {
+                   if ($fechaHoraFinTimestamp > $currentTimestamp) {
                     $estado = 'Activa';
                     $estadoColor = 'green';
                     } else {
                     $estado = 'Finalizada';
                     $estadoColor = 'red';
                     }
-
-                   //echo time();
-
 
                     echo "<tr>";
                     if (empty($fotoSala)) {
