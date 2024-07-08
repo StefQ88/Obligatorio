@@ -29,13 +29,30 @@ require_once "DAO.php";
             $consulta = $this->con->query( $sql);
             $cantidadFilas = $consulta->rowCount();
             if ($cantidadFilas > 0){
-                echo "<p align = center>El usuario tiene $cantidadFilas datos: </p>";
+                /*echo "<p align = center>El usuario tiene $cantidadFilas datos: </p>";
                 echo "<table width='60%' align='center' border='1'>";
                 echo "<th bgcolor='gray'>", "Imagen de la Sala", "</th>";
                 echo "<th bgcolor='gray'>", "Nombre de la Sala", "</th>";
                 echo "<th bgcolor='gray'>","Capacidad de la Sala", "</th>";
                 echo "<th bgcolor='gray'>", "hora de inicio", "</th>";
-                echo "<th bgcolor='gray'>", "hora de fin", "</th>";
+                echo "<th bgcolor='gray'>", "hora de fin", "</th>";*/
+                echo "<p align = center>El usuario tiene $cantidadFilas datos: </p>";
+                echo"<main class='table' id='customers_table'>";
+                echo"<section class='table_header'>";
+                    echo"<h1>Tabla de Salas</h1>";
+                echo"</section>";
+                echo "<section {ble_body'>";
+                echo "<table>";
+                    echo "<thead>";
+                        echo "<tr>";
+                            echo "<th>Imagen de la Sala</th>";
+                            echo "<th>Nombre de la Sala</th>";
+                            echo "<th>Capacidad de la sala</th>";
+                            echo "<th>hora de inicio</th>";
+                            echo "<th>hora de fin</th>";
+                        echo "</tr>";
+                    echo "</thead>";
+                    echo "<tbody>";
                 
                 while ($row = $consulta->fetch(PDO::FETCH_OBJ)){ 
                     echo "<tr>";
@@ -51,15 +68,18 @@ require_once "DAO.php";
                         }else{
                             echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='$img' style='width: 70px'></a></div></td>";
                         }
-                        echo "<td>".$name."</td>";
-                        echo "<td>".$capacidad."</td>";
-                        echo "<td>".$horaInicio."</td>";
-                        echo "<td>".$horaFin."</td>";
+                        echo "<td>{$name}</td>";
+                        echo "<td>{$capacidad}</td>";
+                        echo "<td>{$horaInicio}</td>";
+                        echo "<td>{$horaFin}</td>";
                         
                         
                     echo "</tr>";
                 }
+                echo "</tbody>";
                 echo "</table>";
+            echo "</section>";
+            echo "</main>";
             } else
             echo "<p align = center color= #fff>El empleado no tiene datos. </p>";
         }
@@ -74,25 +94,25 @@ require_once "DAO.php";
                 echo "<p align = center>El usuario tiene $cantidadFilas datos: </p>";
 
                 echo"<main class='table' id='customers_table'>";
-                echo"<section class='table__header'>";
+                echo"<section class='table_header'>";
                     echo"<h1>Tabla de Salas</h1>";
                 echo"</section>";
-                echo "<section class='table__body'>";
+                echo "<section = 'table_body'>";
                 echo "<table>";
                     echo "<thead>";
                         echo "<tr>";
-                            echo "<th>" . "Imagen de la Sala" . "</th>";
-                            echo "<th>", "Nombre de la Sala", "</th>";
-                            echo "<th>", "hora de inicio", "</th>";
-                            echo "<th>", "hora de fin", "</th>";
-                            echo "<th>", "Nombre del Empleado", "</th>";
-                            echo "<th>", "Apellido del Empleado", "</th>";
-                            echo "<th>", "ci empleado", "</th>";
+                            echo "<th>Imagen de la Sala</th>";
+                            echo "<th>Nombre de la Sala</th>";
+                            echo "<th>hora de inicio</th>";
+                            echo "<th>hora de fin</th>";
+                            echo "<th>Nombre del Empleado</th>";
+                            echo "<th>Apellido del Empleado</th>";
+                            echo "<th>ci empleado</th>";
                         echo "</tr>";
                     echo "</thead>";
                     echo "<tbody>";
                         while ($row = $consulta->fetch(PDO::FETCH_OBJ)){
-                            echo "<tr>";
+                            
                                 $idSala = $row->IdSala;
                                 $ciEmpleado = $row->CiEmpleado;
                                 $horaInicio = $row->horaInicio;
@@ -101,18 +121,18 @@ require_once "DAO.php";
                                 $name = $row->primerNombre;
                                 $apellido = $row->primerApellido;
                                 $nombre = $row->nombre;
-                                //echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='img/$img' width='100' height='100'></a></div></td>";
+                                echo "<tr>";//echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='img/$img' width='100' height='100'></a></div></td>";
                                 if (empty($img)){
                                     echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='uploads/default-pp.png'  style='width: 70px'></a></div></td>";
                                 }else{
                                     echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='$img' style='width: 70px'></a></div></td>";
                                 }
-                                echo "<td>".$nombre."</td>";
-                                echo "<td>".$horaInicio."</td>";
-                                echo "<td>".$horaFin."</td>";
-                                echo "<td>".$name."</td>";
-                                echo "<td>".$apellido."</td>";
-                                echo "<td>".$ciEmpleado."</td>";
+                                echo "<td> {$nombre}</td>";
+                                echo "<td>{$horaInicio}</td>";
+                                echo "<td>{$horaFin}</td>";
+                                echo "<td>{$name}</td>";
+                                echo "<td>{$apellido}</td>";
+                                echo "<td>{$ciEmpleado}</td>";
                                                     
                             echo "</tr>";
                         }
