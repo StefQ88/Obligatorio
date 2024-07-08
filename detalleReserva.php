@@ -58,7 +58,7 @@ if (isset($_SESSION['usuario'])) {
         echo "la sala es: $idSala";
         $sala->mostrarSala($idSala);
     }else{
-        echo "Debe de seleccionar un código de Película para poder desplegar su información.";
+        echo "No se puede desplegar su información.";
     }  
 
 ?>

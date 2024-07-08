@@ -51,7 +51,7 @@
 <div class="d-flex justify-content-center align-items-center vh-100">
         
         <form class="shadow w-450 p-3" action="editar-perfil.php" method="post" enctype="multipart/form-data">
-            <h4 class="display-4  fs-1">Edit Profile</h4><br>
+            <h4 class="display-4  fs-1" style="color: #f0f0f0;">Edit Profile</h4><br>
             <!-- error -->
             <?php if(isset($_GET['error'])){ ?>
             <div class="alert alert-danger" role="alert">

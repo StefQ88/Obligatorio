@@ -10,7 +10,11 @@ if (isset($_SESSION['usuario'])) {
 <head><script src="../assets/js/color-modes.js"></script>
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <?php if ($_SESSION['usuario']['tipoUsuario']== 'empleado'){ ?>
     <meta http-equiv="refresh" content="600; url=login.php?error=La session expiro">
+    <?php }else if ($_SESSION['usuario']['tipoUsuario']== 'administrador'){ ?>
+    <meta http-equiv="refresh" content="3600; url=login.php?error=La session expiro">
+    <?php }?>
 	<title>Inicio</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 

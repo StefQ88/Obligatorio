@@ -23,7 +23,7 @@
 
         public function buscarDatos ($ciEmpleado) {
     
-            $sql = "SELECT * FROM saladeconferencias sc, datos d WHERE d.IdSala = sc.id AND d.CiEmpleado = '$ciEmpleado';";
+            $sql = "SELECT * FROM saladeconferencias sc, datos d WHERE d.IdSala = sc.id AND d.CiEmpleado = '$ciEmpleado' AND d.horaFIn >= date(now())";
             $consulta = $this->con->query( $sql);
             $cantidadFilas = $consulta->rowCount();
             if ($cantidadFilas > 0){
@@ -47,7 +47,7 @@
                         if (empty($img)){
                             echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='uploads/default-pp.png' style='width: 70px'></a></div></td>";
                         }else{
-                            echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='uploads/$img' style='width: 70px'></a></div></td>";
+                            echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='$img' style='width: 70px'></a></div></td>";
                         }
                         echo "<td>".$name."</td>";
                         echo "<td>".$capacidad."</td>";
@@ -110,7 +110,7 @@
                                 if (empty($img)){
                                     echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='uploads/default-pp.png'  style='width: 70px'></a></div></td>";
                                 }else{
-                                    echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='uploads/$img' style='width: 70px'></a></div></td>";
+                                    echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='$img' style='width: 70px'></a></div></td>";
                                 }
                                 echo "<td>".$nombre."</td>";
                                 echo "<td>".$horaInicio."</td>";
