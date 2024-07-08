@@ -1,6 +1,6 @@
 <?php
 //require_once "./tablas.php";
-date_default_timezone_set('America/Montevideo'); // Ajusta la zona horaria según sea necesario
+date_default_timezone_set('America/Montevideo'); 
 require_once "DAO.php";
 
     class datos extends DAO{
