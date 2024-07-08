@@ -67,7 +67,7 @@ require_once "DAO.php";
 
         public function buscarDatos2 () {
             
-            $sql = "SELECT * FROM saladeconferencias as sc, datos as d, usuarios as u WHERE d.IdSala = sc.id AND d.horaFIn >= date(now()) and u.tipoUsuario = 'empleado'";
+            $sql = "SELECT * FROM saladeconferencias as sc, datos as d, usuarios as u WHERE d.IdSala = sc.id AND d.horaFIn >= date(now()) and u.tipoUsuario = 'empleado' AND d.CiEmpleado = u.ci";
             $consulta = $this->con->query( $sql);
             $cantidadFilas = $consulta->rowCount();
             if ($cantidadFilas > 0){
