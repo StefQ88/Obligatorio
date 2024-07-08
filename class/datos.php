@@ -240,13 +240,13 @@ require_once "DAO.php";
         return $result === 0;
     }
 
-    public function crearReserva($salaId, $usuarioId, $fechaInicio, $fechaFin) {
+    public function crearReserva($salaId, $usuarioId, $fechaReserva,$fechaInicio, $fechaFin) {
         $query = "INSERT INTO datos (IdSala, CiEmpleado, fechaReserva, horaInicio, horaFin) 
         VALUES (:IdSala, :CiEmpleado, :fechaReserva, :horaInicio, :horaFin)";
         $stmt = $this->con->prepare($query);
         $stmt->bindValue(':IdSala', $salaId);
         $stmt->bindValue(':CiEmpleado', $usuarioId);
-        $stmt->bindValue(':fechaReserva', $fechaInicio);
+        $stmt->bindValue(':fechaReserva', $fechaReserva);
         $stmt->bindValue(':horaInicio', $fechaInicio);
         $stmt->bindValue(':horaFin', $fechaFin);
         $sql = "UPDATE `saladeconferencias` SET `estado` = 'no_disponible' WHERE `id` = :idSala";
