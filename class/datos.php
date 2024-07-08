@@ -1,5 +1,7 @@
 <?php
 //require_once "./tablas.php";
+require_once "DAO.php";
+
     class datos extends DAO{
         /*private $idSala;
         private $ciEmpleado;
@@ -130,16 +132,95 @@
                 echo "<p align = center>No existen salas las cuales su hora de finalizacion sea mayor a la hora actual. </p>";
         }
 
-      
+        
 
+        public function obtenerhistorialReservas($ciEmpleado){
 
+            $sql = "SELECT sc.foto, sc.nombre, d.IdSala, d.fechaReserva, d.horaInicio, d.horaFin
+            FROM saladeconferencias AS sc
+            JOIN datos AS d ON d.IdSala  = sc.id
+            JOIN usuarios As u ON d.CiEmpleado = u.ci
+            WHERE d.CiEmpleado = :ciEmpleado
+            ORDER BY d.fechaReserva DESC, d.horaFin DESC";
+    
+            $consulta = $this->con->prepare($sql); //preparamos la consulta
+            $consulta ->execute(['ciEmpleado' => $ciEmpleado]); //se ejecuta
 
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+          }
 
+       /* public function obtenerFotoSala($idSala){
+            $sql = "SELECT foto FROM saladeconferencias WHERE id = :idSala";
+            $consulta = $this->con->prepare($sql);
+            $consulta->execute(['idSala' => $idSala]);
+            $foto = $consulta->fetchColumn();
+            
+            return $foto;
+        }*/
 
+        public function mostrarHistorialReservas($ciEmpleado){
+            $reservas = $this->obtenerhistorialReservas($ciEmpleado);
 
+            if($reservas){
+                echo "<p align = center>El usuario tiene " . count($reservas). " reservas: </p>";
 
+                echo "<main class = 'table' id='customers_table'>";
+                echo "<section class='table_header'>";
+                    echo "<h1>Historial de Reservas</h1>";
+                echo "</section>";
+                echo "<section = 'table_body'>";
+                echo "<table>";
+                    echo "<thead>";
+                        echo "<tr>";
+                            echo "<th>" . "Imagen de la Sala" . "</th>";
+                            echo "<th>" . "Nombre de la Sala" . "</th>";
+                            echo "<th>" . "Fecha y Hora de Inicio" . "</th>";
+                            echo "<th>" . "Fecha y Hora de Fin" . "</th>";
+                            echo "<th>" . "Estado" . "</th>";
+                            echo "<th>" . "Link a Detalle" . "</th>";
+                        echo "</tr>";
+                    echo "</thead>";
+                echo "</tbody>";
 
+                foreach ($reservas as $reserva){
 
+                    $idSala = $reserva['IdSala'];
+                    $fotoSala = $reserva['foto'];
+                    $nombreSala = $reserva['nombre'];
+                    $fechaInicio = date('d-m-Y H:i', strtotime($reserva['fechaReserva'] . ' ' . $reserva['horaInicio']));
+                    $fechaFin = date('d-m-Y H:i', strtotime($reserva['fechaReserva'] . ' ' . $reserva['horaFin']));
+                    //$estado = (strtotime($reserva['horaFin']) > time()) ? 'Activa' : 'Finalizada';
+                   // $estadoColor = ($estado === 'Activa') ? 'green' : 'red';
 
+                   if (strtotime($reserva['fechaReserva'] . ' ' . $reserva['horaFin']) > time()) {
+                    $estado = 'Activa';
+                    $estadoColor = 'green';
+                    } else {
+                    $estado = 'Finalizada';
+                    $estadoColor = 'red';
+                    }
+
+                    echo "<tr>";
+                    if (empty($fotoSala)) {
+                        echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='uploads/default-pp.png'  style='width: 70px'></a></div></td>";
+                    } else {
+                        echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='$fotoSala' style='width: 70px'></a></div></td>";
+                    }
+                    echo "<td>{$nombreSala}</td>";
+                    echo "<td>{$fechaInicio}</td>";
+                    echo "<td>{$fechaFin}</td>";
+                    echo "<td style='color: {$estadoColor}'>{$estado}</td>";
+                    echo "<td><a href='detalleReserva.php?id={$idSala}'>Ver Detalle</a></td>";
+                    echo "</tr>";
+                 }
+
+                echo "</tbody>";
+                echo "</table>";
+                echo "</section>";
+                echo "</main>";
+                } else {
+                    echo "<p align='center'>No se encontraron reservas para el empleado con CI: {$ciEmpleado}</p>";
+                }
+        }
     }
 ?>
