@@ -50,6 +50,7 @@ class datos extends DAO
             echo "</tr>";
             echo "</thead>";
             echo "<tbody>";
+            $i = 0;
 
             while ($row = $consulta->fetch(PDO::FETCH_OBJ)) {
                 echo "<tr>";
@@ -62,24 +63,29 @@ class datos extends DAO
                 $idSala = $row->IdSala;
                 $fechaHoraInicio = date('d-m-Y H:i', strtotime($fecha . ' ' . $horaInicio));
                 $fechaHoraFin = date('d-m-Y H:i', strtotime($fecha . ' ' . $horaFin));
-                //echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='uploads/$img' width='100' height='100'></a></div></td>";
-                if (empty($img)) {
-                    echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='uploads/default-pp.png' style='width: 70px'></a></div></td>";
-                } else {
-                    echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='$img' style='width: 70px'></a></div></td>";
+                $fechaHoraFinTimestamp = strtotime($fecha . ' ' . $horaFin);
+                $currentTimestamp = time();
+
+                if ($fechaHoraFinTimestamp > $currentTimestamp) {
+                    $i++;
+                    if (empty($img)) {
+                        echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='uploads/default-pp.png' style='width: 70px'></a></div></td>";
+                    } else {
+                        echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='$img' style='width: 70px'></a></div></td>";
+                    }
+                    echo "<td>{$name}</td>";
+                    echo "<td>{$capacidad}</td>";
+                    echo "<td>{$fechaHoraInicio}</td>";
+                    echo "<td>{$fechaHoraFin}</td>";
+                    echo "</tr>";
                 }
-                echo "<td>{$name}</td>";
-                echo "<td>{$capacidad}</td>";
-                echo "<td>{$fechaHoraInicio}</td>";
-                echo "<td>{$fechaHoraFin}</td>";
-
-
-                echo "</tr>";
             }
             echo "</tbody>";
             echo "</table>";
             echo "</section>";
             echo "</main>";
+            if ($i == 0)
+                echo "<p align = center color= #fff>El empleado no tiene reservas activas. </p>";
         } else
             echo "<p align = center color= #fff>El empleado no tiene datos. </p>";
     }
@@ -113,6 +119,7 @@ class datos extends DAO
             echo "</tr>";
             echo "</thead>";
             echo "<tbody>";
+            $i = 0;
             while ($row = $consulta->fetch(PDO::FETCH_OBJ)) {
 
                 $idSala = $row->IdSala;
@@ -126,6 +133,11 @@ class datos extends DAO
                 $nombre = $row->nombre;
                 $fechaHoraInicio = date('d-m-Y H:i', strtotime($fecha . ' ' . $horaInicio));
                 $fechaHoraFin = date('d-m-Y H:i', strtotime($fecha . ' ' . $horaFin));
+                $fechaHoraFinTimestamp = strtotime($fecha . ' ' . $horaFin);
+                $currentTimestamp = time();
+
+                if ($fechaHoraFinTimestamp > $currentTimestamp) {
+                    $i++;
                 echo "<tr>"; //echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='img/$img' width='100' height='100'></a></div></td>";
                 if (empty($img)) {
                     echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='uploads/default-pp.png'  style='width: 70px'></a></div></td>";
@@ -140,11 +152,14 @@ class datos extends DAO
                 echo "<td>{$ciEmpleado}</td>";
 
                 echo "</tr>";
+                }
             }
             echo "</tbody>";
             echo "</table>";
             echo "</section>";
             echo "</main>";
+            if ($i == 0)
+            echo "<p align = center color= #fff>no existen reservas activas. </p>";
         } else
             echo "<p align = center color=#fff>No existen salas las cuales su hora de finalizacion sea mayor a la hora actual. </p>";
     }
