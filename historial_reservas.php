@@ -39,7 +39,8 @@ if (isset($_SESSION['usuario'])) {
                     <?php } ?>
                     </li>
                 <?php } else if ($_SESSION['usuario']['tipoUsuario'] == 'administrador') { ?>
-                    <li><a href="test.php">OfficeSpaces</a></li>
+                    <li><a href="index.php">OfficeSpaces</a></li>
+                    <li> <img src="uploads/oficina.png" class="img-fluid rounded-circle"> </li>
 
                 <?php } ?>
                 <li><a href="index.php">Inicio</a></li>
@@ -53,7 +54,7 @@ if (isset($_SESSION['usuario'])) {
             </ul>
             <ul>
 
-                <li><a href="test.php">OfficeSpaces</a></li>
+                <li><a href="index.php">OfficeSpaces</a></li>
                 <li onclick=showSidebar()><a href="#"> <svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26" fill="#000000">
                             <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
                         </svg> </a>
