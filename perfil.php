@@ -107,11 +107,9 @@ if (isset($_SESSION['usuario'])) {
                     <input type="file" class="form-control" name="fotoPerfil">
                     <?php if (empty($_SESSION['fotoPerfil'])) { ?>
                         <img src="uploads/default-pp.png" class="img-fluid rounded-circle" style="width: 70px">
-                    <? php;
-                    } else { ?>
+                    <?php } else { ?>
                         <img src="uploads/<?= $_SESSION['fotoPerfil'] ?>" class="img-fluid rounded-circle" style="width: 70px">
-                    <? php;
-                    } ?>
+                    <?php } ?>
                     <input type="text" hidden="hidden" name="fotoVieja" value="<?= $_SESSION['usuario']['fotoPerfil'] ?>">
                 </div>
                 <!--<div class="mb-3">
