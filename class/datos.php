@@ -33,13 +33,6 @@ class datos extends DAO
         $consulta = $this->con->query($sql);
         $cantidadFilas = $consulta->rowCount();
         if ($cantidadFilas > 0) {
-            /*echo "<p align = center>El usuario tiene $cantidadFilas datos: </p>";
-                echo "<table width='60%' align='center' border='1'>";
-                echo "<th bgcolor='gray'>", "Imagen de la Sala", "</th>";
-                echo "<th bgcolor='gray'>", "Nombre de la Sala", "</th>";
-                echo "<th bgcolor='gray'>","Capacidad de la Sala", "</th>";
-                echo "<th bgcolor='gray'>", "hora de inicio", "</th>";
-                echo "<th bgcolor='gray'>", "hora de fin", "</th>";*/
             echo "<p align = center>El usuario tiene $cantidadFilas datos: </p>";
             echo "<main class='table' id='customers_table'>";
             echo "<section class='table_header'>";
@@ -62,10 +55,13 @@ class datos extends DAO
                 echo "<tr>";
                 $horaInicio = $row->horaInicio;
                 $horaFin = $row->horaFin;
+                $fecha = $row->fechaReserva;
                 $img = $row->foto;
                 $name = $row->nombre;
                 $capacidad = $row->capacidad;
                 $idSala = $row->IdSala;
+                $fechaHoraInicio = date('d-m-Y H:i', strtotime($fecha . ' ' . $horaInicio));
+                $fechaHoraFin = date('d-m-Y H:i', strtotime($fecha . ' ' . $horaFin));
                 //echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='uploads/$img' width='100' height='100'></a></div></td>";
                 if (empty($img)) {
                     echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='uploads/default-pp.png' style='width: 70px'></a></div></td>";
@@ -74,8 +70,8 @@ class datos extends DAO
                 }
                 echo "<td>{$name}</td>";
                 echo "<td>{$capacidad}</td>";
-                echo "<td>{$horaInicio}</td>";
-                echo "<td>{$horaFin}</td>";
+                echo "<td>{$fechaHoraInicio}</td>";
+                echo "<td>{$fechaHoraFin}</td>";
 
 
                 echo "</tr>";
@@ -107,9 +103,10 @@ class datos extends DAO
             echo "<thead>";
             echo "<tr>";
             echo "<th>Imagen de la Sala</th>";
-            echo "<th>Nombre de la Sala</th>";
-            echo "<th>hora de inicio</th>";
-            echo "<th>hora de fin</th>";
+            echo "<th>Nombre de la Sala</th>";;
+            echo "<th>hora y fecha de inicio</th>";
+            echo "<th>hora y fecha de fin</th>";
+
             echo "<th>Nombre del Empleado</th>";
             echo "<th>Apellido del Empleado</th>";
             echo "<th>ci empleado</th>";
@@ -122,10 +119,13 @@ class datos extends DAO
                 $ciEmpleado = $row->CiEmpleado;
                 $horaInicio = $row->horaInicio;
                 $horaFin = $row->horaFin;
+                $fecha = $row->fechaReserva;
                 $img = $row->foto;
                 $name = $row->primerNombre;
                 $apellido = $row->primerApellido;
                 $nombre = $row->nombre;
+                $fechaHoraInicio = date('d-m-Y H:i', strtotime($fecha . ' ' . $horaInicio));
+                $fechaHoraFin = date('d-m-Y H:i', strtotime($fecha . ' ' . $horaFin));
                 echo "<tr>"; //echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='img/$img' width='100' height='100'></a></div></td>";
                 if (empty($img)) {
                     echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='uploads/default-pp.png'  style='width: 70px'></a></div></td>";
@@ -133,8 +133,8 @@ class datos extends DAO
                     echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='$img' style='width: 70px'></a></div></td>";
                 }
                 echo "<td> {$nombre}</td>";
-                echo "<td>{$horaInicio}</td>";
-                echo "<td>{$horaFin}</td>";
+                echo "<td>{$fechaHoraInicio}</td>";
+                echo "<td>{$fechaHoraFin}</td>";
                 echo "<td>{$name}</td>";
                 echo "<td>{$apellido}</td>";
                 echo "<td>{$ciEmpleado}</td>";

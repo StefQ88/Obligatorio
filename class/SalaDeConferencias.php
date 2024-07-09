@@ -9,28 +9,7 @@ class Sala extends DAO
         $sql = 'INSERT INTO saladeconferencias (nombre, capacidad, ubicacion, equipamientoDisponible, estado, foto)
                     VALUES (:nombre, :capacidad, :ubicacion, :equipamientoDisponible, :estado, :foto)';
 
-        /*$parametros = array(
-                ':nombre' => $sala->nombre,
-                ':capacidad' => $sala->capacidad,
-                ':ubicacion' => $sala->ubicacion,
-                ':equipamientoDisponible' => $sala->equipamientoDisponible,
-                ':estado' => $sala->estado,
-                ':foto' => $sala->foto
-            );
-
-            $this->execute($sql, $parametros);
-
-            $resultado = $this->getResultado();
-            if ($resultado['error']) {
-                return false;
-            } else {
-                return true;
-            }
-        } catch (PDOException $ex) {
-            return false; 
-        }*/
-
-
+        
         $consulta = $this->con->prepare($sql);
         $consulta->bindValue(':nombre', $nombre);
         $consulta->bindValue(':capacidad', $capacidad);
@@ -56,14 +35,6 @@ class Sala extends DAO
         $sql = "SELECT * FROM saladeconferencias as sc, datos as d WHERE d.IdSala = '$idSala' AND d.IdSala = sc.id";
         $consulta = $this->con->query($sql);
 
-        /*echo "<table width='60%' align='center' border='0'>";//crearTabla();
-            echo "<th bgcolor='gray'>", "Imagen de la Sala", "</th>";
-            echo "<th bgcolor='gray'>", "Nombre de la Sala", "</th>";
-            echo "<th bgcolor='gray'>", "Capacidad", "</th>";
-            echo "<th bgcolor='gray'>", "Equipamiento de la sala", "</th>";
-            echo "<th bgcolor='gray'>", "hora de inicio", "</th>";
-            echo "<th bgcolor='gray'>", "hora de fin", "</th>";
-            echo "<th bgcolor='gray'>", "Motivo de la reserva", "</th>";*/
         echo "<main class = 'table' id='customers_table'>";
         echo "<section class='table_header'>";
         echo "<h1>Salas</h1>";
@@ -76,8 +47,8 @@ class Sala extends DAO
         echo "<th>Nombre de la Sala</th>";
         echo "<th>Capacidad</th>";
         echo "<th>Equipamiento de la sala</th>";
-        echo "<th>Hora de Inicio</th>";
-        echo "<th>Hora de Fin</th>";
+        echo "<th>Fecha y hora de Inicio</th>";
+        echo "<th>Fecha y hora de Fin</th>";
         echo "<th>Motivo de la reserva</th>";
         echo "</tr>";
         echo "</thead>";
@@ -86,18 +57,22 @@ class Sala extends DAO
 
             $horaInicio = $row->horaInicio;
             $horaFin = $row->horaFin;
+            $fecha = $row->fechaReserva;
             $img = $row->foto;
             $nombre = $row->nombre;
             $capacidad = $row->capacidad;
             $equipamientoDisponible = $row->equipamientoDisponible;
             $motivo = $row->motivo;
+            $fechaHoraInicio = date('d-m-Y H:i', strtotime($fecha . ' ' . $horaInicio));
+            $fechaHoraFin = date('d-m-Y H:i', strtotime($fecha . ' ' . $horaFin));
+                
             echo "<tr>";
             echo "<td><img src='$img' ></td>";
             echo "<td>{$nombre}</td>";
             echo "<td>{$capacidad}</td>";
             echo "<td>{$equipamientoDisponible}</td>";
-            echo "<td>{$horaInicio}</td>";
-            echo "<td>{$horaFin}</td>";
+            echo "<td>{$fechaHoraInicio}</td>";
+            echo "<td>{$fechaHoraFin}</td>";
             echo "<td>{$motivo}</td>";
 
             echo "</tr>";
