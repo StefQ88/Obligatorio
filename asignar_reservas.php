@@ -44,7 +44,8 @@
                         <li> <img src="uploads/<?= $_SESSION['usuario']['fotoPerfil'] ?>" class="img-fluid rounded-circle"> </li>
                     <?php } ?>
                 <?php } else if ($_SESSION['usuario']['tipoUsuario'] == 'administrador') { ?>
-                    <li><a href="test.php">OfficeSpaces</a></li>
+                    <li><a href="index.php">OfficeSpaces</a></li>
+                    <li> <img src="uploads/oficina.png" class="img-fluid rounded-circle"> </li>
             </div>
         <?php } ?>
         <li><a href="index.php">Inicio</a></li>
