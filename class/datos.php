@@ -26,7 +26,7 @@ require_once "DAO.php";
 
         public function buscarDatos ($ciEmpleado) {
     
-            $sql = "SELECT * FROM saladeconferencias sc, datos d WHERE d.IdSala = sc.id AND d.CiEmpleado = '$ciEmpleado' AND d.horaFIn >= date(now())";
+            $sql = "SELECT * FROM saladeconferencias sc, datos d WHERE d.IdSala = sc.id AND d.CiEmpleado = '$ciEmpleado' AND d.fechaReserva >=date(now()) AND d.horaFIn >= date(now())";
             $consulta = $this->con->query( $sql);
             $cantidadFilas = $consulta->rowCount();
             if ($cantidadFilas > 0){
@@ -49,20 +49,24 @@ require_once "DAO.php";
                             echo "<th>Imagen de la Sala</th>";
                             echo "<th>Nombre de la Sala</th>";
                             echo "<th>Capacidad de la sala</th>";
-                            echo "<th>hora de inicio</th>";
-                            echo "<th>hora de fin</th>";
+                            echo "<th>Fecha y Hora de Inicio</th>";
+                            echo "<th>Fecha y Hora de Fin</th>";
                         echo "</tr>";
                     echo "</thead>";
                     echo "<tbody>";
                 
                 while ($row = $consulta->fetch(PDO::FETCH_OBJ)){ 
                     echo "<tr>";
-                        $horaInicio = $row->horaInicio;
-                        $horaFin = $row->horaFin;
+                    $horaInicio = $row->horaInicio;
+                    $horaFin = $row->horaFin;
+                    $fecha = $row->fechaReserva;
                         $img = $row->foto;
                         $name = $row->nombre;
                         $capacidad = $row->capacidad;
                         $idSala = $row->IdSala;
+                        
+                        $fechaHoraInicio = date('d-m-Y H:i', strtotime($fecha . ' ' . $horaInicio));
+                        $fechaHoraFin = date('d-m-Y H:i', strtotime($fecha . ' ' . $horaFin));
                         //echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='uploads/$img' width='100' height='100'></a></div></td>";
                         if (empty($img)){
                             echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='uploads/default-pp.png' style='width: 70px'></a></div></td>";
@@ -71,8 +75,8 @@ require_once "DAO.php";
                         }
                         echo "<td>{$name}</td>";
                         echo "<td>{$capacidad}</td>";
-                        echo "<td>{$horaInicio}</td>";
-                        echo "<td>{$horaFin}</td>";
+                        echo "<td>{$fechaHoraInicio}</td>";
+                        echo "<td>{$fechaHoraFin}</td>";
                         
                         
                     echo "</tr>";
@@ -104,8 +108,8 @@ require_once "DAO.php";
                         echo "<tr>";
                             echo "<th>Imagen de la Sala</th>";
                             echo "<th>Nombre de la Sala</th>";
-                            echo "<th>hora de inicio</th>";
-                            echo "<th>hora de fin</th>";
+                            echo "<th>Fecha y Hora de Inicio</th>";
+                            echo "<th>Fecha y Hora de Fin</th>";
                             echo "<th>Nombre del Empleado</th>";
                             echo "<th>Apellido del Empleado</th>";
                             echo "<th>ci empleado</th>";
@@ -118,10 +122,13 @@ require_once "DAO.php";
                                 $ciEmpleado = $row->CiEmpleado;
                                 $horaInicio = $row->horaInicio;
                                 $horaFin = $row->horaFin;
+                                $fecha = $row->fechaReserva;
                                 $img = $row->foto;
                                 $name = $row->primerNombre;
                                 $apellido = $row->primerApellido;
                                 $nombre = $row->nombre;
+                                $fechaHoraInicio = date('d-m-Y H:i', strtotime($fecha . ' ' . $horaInicio));
+                                $fechaHoraFin = date('d-m-Y H:i', strtotime($fecha . ' ' . $horaFin));
                                 echo "<tr>";//echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='img/$img' width='100' height='100'></a></div></td>";
                                 if (empty($img)){
                                     echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='uploads/default-pp.png'  style='width: 70px'></a></div></td>";
@@ -129,8 +136,9 @@ require_once "DAO.php";
                                     echo "<td> <div class='cell'><a href='detalleReserva.php?id=$idSala'><img src='$img' style='width: 70px'></a></div></td>";
                                 }
                                 echo "<td> {$nombre}</td>";
-                                echo "<td>{$horaInicio}</td>";
-                                echo "<td>{$horaFin}</td>";
+                                
+                                echo "<td>{$fechaHoraInicio}</td>";
+                                echo "<td>{$fechaHoraFin}</td>";
                                 echo "<td>{$name}</td>";
                                 echo "<td>{$apellido}</td>";
                                 echo "<td>{$ciEmpleado}</td>";

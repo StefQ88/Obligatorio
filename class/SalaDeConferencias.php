@@ -77,8 +77,8 @@ class Sala extends DAO
                         echo "<th>Nombre de la Sala</th>";
                         echo "<th>Capacidad</th>";
                         echo "<th>Equipamiento de la sala</th>";
-                        echo "<th>Hora de Inicio</th>";
-                        echo "<th>Hora de Fin</th>";
+                        echo "<th>Fecha y Hora de Inicio</th>";
+                        echo "<th>Fecha y Hora de Fin</th>";;
                         echo "<th>Motivo de la reserva</th>";
                     echo "</tr>";
                 echo "</thead>";
@@ -87,18 +87,22 @@ class Sala extends DAO
                 
                     $horaInicio = $row->horaInicio;
                     $horaFin = $row->horaFin;
+                    $fecha = $row->fechaReserva;
                     $img = $row->foto;
                     $nombre = $row->nombre;
                     $capacidad = $row->capacidad;
                     $equipamientoDisponible = $row->equipamientoDisponible;
                     $motivo = $row->motivo;
+                    $fechaHoraInicio = date('d-m-Y H:i', strtotime($fecha . ' ' . $horaInicio));
+                    $fechaHoraFin = date('d-m-Y H:i', strtotime($fecha . ' ' . $horaFin));
+                        
                   echo "<tr>";  
                     echo "<td><img src='$img' ></td>";
                     echo "<td>{$nombre}</td>";
                     echo "<td>{$capacidad}</td>";
                     echo "<td>{$equipamientoDisponible}</td>";
-                    echo "<td>{$horaInicio}</td>";
-                    echo "<td>{$horaFin}</td>";
+                    echo "<td>{$fechaHoraInicio}</td>";
+                    echo "<td>{$fechaHoraFin}</td>";
                     echo "<td>{$motivo}</td>";
                                         
                 echo "</tr>";

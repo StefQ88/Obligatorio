@@ -36,6 +36,7 @@ if (isset($_SESSION['usuario'])) {
                     <li> <img src="uploads/<?=$_SESSION['usuario']['fotoPerfil']?>" class="img-fluid rounded-circle"> </li>
                 <?php }?>
             <?php }else if ($_SESSION['usuario']['tipoUsuario']== 'administrador'){ ?>
+                <li><img src="uploads/oficina.png" class="img-fluid rounded-circle"> </li>
                 <li><a href="test.php">OfficeSpaces</a></li>
             </div>
             <?php } ?>
@@ -49,6 +50,7 @@ if (isset($_SESSION['usuario'])) {
             <li><a href="logout.php">Salir</a></li>
         </ul>
         <ul>
+                <li><img src="uploads/oficina.png" class="img-fluid rounded-circle"> </li>
                 <li><a href="index.php">OfficeSpaces</a></li>
                 <?php if (empty($_SESSION['usuario']['fotoPerfil'])){?>
                     <li>    <a><img src="uploads/default-pp.png" class="img-fluid rounded-circle" style="width: 6%;"></a> </li>
