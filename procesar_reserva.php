@@ -9,14 +9,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
      $fechaFin = $_POST['horaFin'];
 
 
-    if ($dato->validarFechas($fechaInicio, $fechaFin)) {
-        //if ($dato->verificarDisponibilidad($salaId/*, $fechaReserva,$fechaReserva,$fechaInicio, $fechaFin*/)) {
-            $dato->crearReserva($salaId, $usuarioId, $fechaReserva,$fechaInicio, $fechaFin);
-            header('Location: index.php?exito=Reserva realizada con éxito');
-       /*} else {
+     //if ($dato->validarFechas($fechaInicio, $fechaFin)) {
+     // if ($dato->verificarDisponibilidad($salaId, $fechaReserva,$fechaReserva,$fechaInicio, $fechaFin)) {
+     $dato->crearReserva($salaId, $usuarioId, $fechaReserva, $fechaInicio, $fechaFin);
+     header('Location: index.php?exito=Reserva realizada con éxito');
+     /* } else {
             header('Location: asignar_reservas.php?error=La sala ya está reservada en la fecha seleccionada');
         }*/
-   } else {
+     /* } else {
         header('Location: asignar_reservas.php?error=Las fechas son inválidas');
-    }
+    }*/
 }

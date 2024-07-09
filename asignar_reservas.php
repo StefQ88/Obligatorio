@@ -68,10 +68,6 @@
                     </svg> </a>
         </ul>
     </nav>
-<<<<<<< HEAD
-
-
-=======
   
     <?php
                 if (isset($_GET['error'])){ ?>
@@ -79,7 +75,6 @@
                 <?php if (isset($_GET['exito'])){ ?>
                     <p class="exito"><?php echo $_GET['exito']?></p> 
             <?php }?>
->>>>>>> cf27ecefb34c8f8e33ebb39907fb48316be6c8df
     <div class="container">
         <h2>Asignar Reserva</h2>
         <form action="procesar_reserva.php" method="post">

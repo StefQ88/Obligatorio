@@ -26,13 +26,14 @@ class datos extends DAO
         } else return false;
     }
 
-        public function buscarDatos ($ciEmpleado) {
-    
-            $sql = "SELECT * FROM saladeconferencias sc, datos d WHERE d.IdSala = sc.id AND d.CiEmpleado = '$ciEmpleado' AND d.fechaReserva >=date(now()) AND d.horaFIn >= date(now())";
-            $consulta = $this->con->query( $sql);
-            $cantidadFilas = $consulta->rowCount();
-            if ($cantidadFilas > 0){
-                /*echo "<p align = center>El usuario tiene $cantidadFilas datos: </p>";
+    public function buscarDatos($ciEmpleado)
+    {
+
+        $sql = "SELECT * FROM saladeconferencias sc, datos d WHERE d.IdSala = sc.id AND d.CiEmpleado = '$ciEmpleado' AND d.horaFIn >= date(now())";
+        $consulta = $this->con->query($sql);
+        $cantidadFilas = $consulta->rowCount();
+        if ($cantidadFilas > 0) {
+            /*echo "<p align = center>El usuario tiene $cantidadFilas datos: </p>";
                 echo "<table width='60%' align='center' border='1'>";
                 echo "<th bgcolor='gray'>", "Imagen de la Sala", "</th>";
                 echo "<th bgcolor='gray'>", "Nombre de la Sala", "</th>";

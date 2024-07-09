@@ -20,25 +20,29 @@ if (isset($_SESSION['usuario'])) {
         <title>Inicio</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
-    
-</head>
-<body>
-   <nav>
-        <ul class="sidebar">
-            <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26" fill="#000000"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
-            <div class="user-info">
-            <?php if ($_SESSION['usuario']['tipoUsuario']== 'empleado'){ ?>
-                <li><a><?php echo $_SESSION['usuario']['primerNombre'] ?></a></li>
-                <li><a><?php echo $_SESSION['usuario']['primerApellido'] ?></a></li>
-                <?php if (empty($_SESSION['usuario']['fotoPerfil'])){?>
-                    <li>    <a><img src="uploads/default-pp.png" class="img-fluid rounded-circle" style="width: 6%;"></a> </li>
-                <?php }else{?>
-                    <li> <img src="uploads/<?=$_SESSION['usuario']['fotoPerfil']?>" class="img-fluid rounded-circle"> </li>
-                <?php }?>
-            <?php }else if ($_SESSION['usuario']['tipoUsuario']== 'administrador'){ ?>
-                <li><img src="uploads/oficina.png" class="img-fluid rounded-circle"> </li>
-                <li><a href="test.php">OfficeSpaces</a></li>
-            </div>
+        <link rel="stylesheet" type="text/css" href="css/style-home.css">
+
+
+    </head>
+
+    <body>
+        <nav>
+            <ul class="sidebar">
+                <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26" fill="#000000">
+                            <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                        </svg></a></li>
+                <div class="user-info">
+                    <?php if ($_SESSION['usuario']['tipoUsuario'] == 'empleado') { ?>
+                        <li><a><?php echo $_SESSION['usuario']['primerNombre'] ?></a></li>
+                        <li><a><?php echo $_SESSION['usuario']['primerApellido'] ?></a></li>
+                        <?php if (empty($_SESSION['usuario']['fotoPerfil'])) { ?>
+                            <li> <a><img src="uploads/default-pp.png" class="img-fluid rounded-circle" style="width: 6%;"></a> </li>
+                        <?php } else { ?>
+                            <li> <img src="uploads/<?= $_SESSION['usuario']['fotoPerfil'] ?>" class="img-fluid rounded-circle"> </li>
+                        <?php } ?>
+                    <?php } else if ($_SESSION['usuario']['tipoUsuario'] == 'administrador') { ?>
+                        <li><a href="test.php">OfficeSpaces</a></li>
+                </div>
             <?php } ?>
             <li><a href="index.php">Inicio</a></li>
             <?php if ($_SESSION['usuario']['tipoUsuario'] == 'administrador') { ?>
