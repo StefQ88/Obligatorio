@@ -2,11 +2,11 @@
 include_once "comun.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $salaId = $_POST['sala'];
-    $usuarioId = $_POST['usuario'];
-    $fechaReserva = $_POST['fechaReserva'];
-    $fechaInicio = $_POST['horaInicio'];
-    $fechaFin = $_POST['horaFin'];
+     $salaId = $_POST['sala'];
+     $usuarioId = $_POST['usuario'];
+     $fechaReserva = $_POST['fechaReserva'];
+     $fechaInicio = $_POST['horaInicio'];
+     $fechaFin = $_POST['horaFin'];
 
 
     if ($dato->validarFechas($fechaInicio, $fechaFin)) {
@@ -20,4 +20,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: asignar_reservas.php?error=Las fechas son inválidas');
     }
 }
-?>

@@ -1,103 +1,108 @@
-<?php 
+<?php
 
-    require_once 'DAO.php';
-    class Usuario extends DAO{
-      
-        
-        public function get($ciUsuer){
-            $consulta = "SELECT * FROM usuarios AS user WHERE user.ci = :ci LIMIT 1";
-            $this->executeGet($consulta, ['ci'=>$ciUsuer]);
+require_once 'DAO.php';
+class Usuario extends DAO
+{
 
-            if (!$this->resultado['error']){
-                return $this->resultado['data'][0];
-            }else return false;
-        }
 
-        public function verficarDatos($email, $pass){
-            $pass = md5($pass);
-            $consulta = "SELECT * FROM usuarios AS user WHERE user.email = :email AND user.pass = :pass LIMIT 1";
-            $this->executeGet($consulta, ['email'=> $email, 'pass' => $pass]);
-            if (!$this->resultado['error']){
-                return $this->resultado['data'][0]['ci'];
-            }else return false;
-        }
+    public function get($ciUsuer)
+    {
+        $consulta = "SELECT * FROM usuarios AS user WHERE user.ci = :ci LIMIT 1";
+        $this->executeGet($consulta, ['ci' => $ciUsuer]);
 
-        public function getEstado($ciUsuer = NULL) {
-            if (isset($ciUsuer)) {
-                //buscar en BD datos de usuario
+        if (!$this->resultado['error']) {
+            return $this->resultado['data'][0];
+        } else return false;
+    }
+
+    public function verficarDatos($email, $pass)
+    {
+        $pass = md5($pass);
+        $consulta = "SELECT * FROM usuarios AS user WHERE user.email = :email AND user.pass = :pass LIMIT 1";
+        $this->executeGet($consulta, ['email' => $email, 'pass' => $pass]);
+        if (!$this->resultado['error']) {
+            return $this->resultado['data'][0]['ci'];
+        } else return false;
+    }
+
+    public function getEstado($ciUsuer = NULL)
+    {
+        if (isset($ciUsuer)) {
+            //buscar en BD datos de usuario
+        } else {
+            //BUSCAMOS EN LA SESSION ACTIVA
+            if (isset($_SESSION['usuario'])) {
+                $usuario = $_SESSION['usuario'];
+            } else {
+                return false;
             }
-            else {
-                //BUSCAMOS EN LA SESSION ACTIVA
-                if (isset($_SESSION['usuario'])) {
-                    $usuario = $_SESSION['usuario'];
-                }else {
-                    return false;
-                }
-            }
-            
-            return isset($usuario['activo']) ? $usuario['activo'] : false;
-        }  
-        public function existsUser($email, $ci) {
-            $sql = 'SELECT COUNT(*) FROM usuarios WHERE email = :email OR ci = :ci';
-            
-            $consulta = $this->con->prepare($sql);
-            
-            $consulta->bindValue(':email', $email);
-            $consulta->bindValue(':ci', $ci);
-
-            $consulta->execute();
-            
-            $resultado = $consulta->fetchColumn();
-            if ($resultado > 0)
-                return true;
-            else return false;
         }
 
-        public function insertUsuario($ci, $primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $fechaNacimiento, $email, $fotoPerfil, $password, $tipoUsuario){
-            
-            $sql = 'INSERT INTO usuarios (ci, primerNombre, segundoNombre, primerApellido, segundoApellido, fechaNacimiento, email, fotoPerfil, pass, tipoUsuario) 
+        return isset($usuario['activo']) ? $usuario['activo'] : false;
+    }
+    public function existsUser($email, $ci)
+    {
+        $sql = 'SELECT COUNT(*) FROM usuarios WHERE email = :email OR ci = :ci';
+
+        $consulta = $this->con->prepare($sql);
+
+        $consulta->bindValue(':email', $email);
+        $consulta->bindValue(':ci', $ci);
+
+        $consulta->execute();
+
+        $resultado = $consulta->fetchColumn();
+        if ($resultado > 0)
+            return true;
+        else return false;
+    }
+
+    public function insertUsuario($ci, $primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $fechaNacimiento, $email, $fotoPerfil, $password, $tipoUsuario)
+    {
+
+        $sql = 'INSERT INTO usuarios (ci, primerNombre, segundoNombre, primerApellido, segundoApellido, fechaNacimiento, email, fotoPerfil, pass, tipoUsuario) 
                     VALUES (:ci, :primerNombre, :segundoNombre, :primerApellido, :segundoApellido, :fechaNacimiento, :email, :fotoPerfil, :pass, :tipoUsuario)';
-            
-            $consulta = $this->con->prepare($sql);
-            
-            $consulta->bindValue(':ci', $ci);
-            $consulta->bindValue(':primerNombre' , $primerNombre);
-            $consulta->bindValue(':segundoNombre' , $segundoNombre);
-            $consulta->bindValue(':primerApellido' , $primerApellido);
-            $consulta->bindValue(':segundoApellido' , $segundoApellido);
-            $consulta->bindValue(':fechaNacimiento' , $fechaNacimiento);
-            $consulta->bindValue(':email' , $email);
-            $consulta->bindValue(':fotoPerfil' , $fotoPerfil);
-            $consulta->bindValue(':pass' , md5($password));
-            $consulta->bindValue(':tipoUsuario' , $tipoUsuario);
 
-            $consulta->execute();
-        }
+        $consulta = $this->con->prepare($sql);
 
-        public function actualizarUsuario($ci,$primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $fechaNacimiento, $email, $fotoPerfil){
-            
-            $sql = "UPDATE usuarios 
+        $consulta->bindValue(':ci', $ci);
+        $consulta->bindValue(':primerNombre', $primerNombre);
+        $consulta->bindValue(':segundoNombre', $segundoNombre);
+        $consulta->bindValue(':primerApellido', $primerApellido);
+        $consulta->bindValue(':segundoApellido', $segundoApellido);
+        $consulta->bindValue(':fechaNacimiento', $fechaNacimiento);
+        $consulta->bindValue(':email', $email);
+        $consulta->bindValue(':fotoPerfil', $fotoPerfil);
+        $consulta->bindValue(':pass', md5($password));
+        $consulta->bindValue(':tipoUsuario', $tipoUsuario);
+
+        $consulta->execute();
+    }
+
+    public function actualizarUsuario($ci, $primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $fechaNacimiento, $email, $fotoPerfil)
+    {
+
+        $sql = "UPDATE usuarios 
             SET primerNombre = :primerNombre, segundoNombre = :segundoNombre, primerApellido = :primerApellido, segundoApellido = :segundoApellido, fechaNacimiento = :fechaNacimiento, email = :email, fotoPerfil = :fotoPerfil 
             WHERE ci = '$ci'";
 
-            $consulta = $this->con->prepare($sql);
-            //$consulta->bindValue(':ci', $ci);
-            $consulta->bindValue(':primerNombre' , $primerNombre);
-            $consulta->bindValue(':segundoNombre' , $segundoNombre);
-            $consulta->bindValue(':primerApellido' , $primerApellido);
-            $consulta->bindValue(':segundoApellido' , $segundoApellido);
-            $consulta->bindValue(':fechaNacimiento' , $fechaNacimiento);
-            $consulta->bindValue(':email' , $email);
-            $consulta->bindValue(':fotoPerfil' , $fotoPerfil);
+        $consulta = $this->con->prepare($sql);
+        //$consulta->bindValue(':ci', $ci);
+        $consulta->bindValue(':primerNombre', $primerNombre);
+        $consulta->bindValue(':segundoNombre', $segundoNombre);
+        $consulta->bindValue(':primerApellido', $primerApellido);
+        $consulta->bindValue(':segundoApellido', $segundoApellido);
+        $consulta->bindValue(':fechaNacimiento', $fechaNacimiento);
+        $consulta->bindValue(':email', $email);
+        $consulta->bindValue(':fotoPerfil', $fotoPerfil);
 
-            $consulta->execute();
-        }
-        public function listarUsuarios() {
-            $result = $this->con->query("SELECT ci, primerNombre, primerApellido  FROM usuarios WHERE tipoUsuario = 'empleado'");
-            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                echo "<option value=\"{$row['ci']}\">{$row['primerNombre']} {$row['primerApellido']}</option>";
-            }
-        }
-
+        $consulta->execute();
     }
-?>
+    public function listarUsuarios()
+    {
+        $result = $this->con->query("SELECT ci, primerNombre, primerApellido  FROM usuarios WHERE tipoUsuario = 'empleado'");
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            echo "<option value=\"{$row['ci']}\">{$row['primerNombre']} {$row['primerApellido']}</option>";
+        }
+    }
+}

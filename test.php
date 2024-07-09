@@ -64,30 +64,12 @@ if($fotoSala){
 }
     */
 
-    $ciEmpleado = '23456789'; 
-    $esAdministrador = false;
-    echo "<h2>Historial de reservas como empleado</h2>";
-    $datos->mostrarHistorialReservas($ciEmpleado,$esAdministrador);
+$ciEmpleado = '23456789';
+$esAdministrador = false;
+echo "<h2>Historial de reservas como empleado</h2>";
+$datos->mostrarHistorialReservas($ciEmpleado, $esAdministrador);
 
 
-    $esAdministrador = true;
-    echo "<h2>Historial de reservas como administrador</h2>";
-    $datos->mostrarHistorialReservas($ciEmpleado,$esAdministrador);
-
-
-
-
-
-
-
-
-
-
-
-
-
-?>
-
-
-
-
+$esAdministrador = true;
+echo "<h2>Historial de reservas como administrador</h2>";
+$datos->mostrarHistorialReservas($ciEmpleado, $esAdministrador);
