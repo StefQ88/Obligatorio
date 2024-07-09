@@ -39,10 +39,10 @@ if (isset($_SESSION['usuario'])) {
                 <?php } ?>
                 <li><a href="index.php">Inicio</a></li>
                 <?php if ($_SESSION['usuario']['tipoUsuario'] == 'administrador') { ?>
-                    <li><a href="#">Asignacion de reservas</a></li>
+                    <li><a href="asignar_reservas.php">Asignacion de reservas</a></li>
                     <li><a href="ingresar_sala.php">Ingreso de salas</a></li>
                 <?php } ?>
-                <li><a href="#">Historial de reservas</a></li>
+                <li><a href="historial_reservas.php">Historial de reservas</a></li>
                 <li><a href="perfil.php">Perfil</a></li>
                 <li><a href="logout.php">Salir</a></li>
             </ul>
@@ -105,10 +105,10 @@ if (isset($_SESSION['usuario'])) {
                 <div class="mb-3">
                     <label class="form-label">Foto Perfil</label>
                     <input type="file" class="form-control" name="fotoPerfil">
-                    <?php if (empty($_SESSION['fotoPerfil'])) { ?>
+                    <?php if (empty($_SESSION['usuario']['fotoPerfil'])) { ?>
                         <img src="uploads/default-pp.png" class="img-fluid rounded-circle" style="width: 70px">
                     <?php } else { ?>
-                        <img src="uploads/<?= $_SESSION['fotoPerfil'] ?>" class="img-fluid rounded-circle" style="width: 70px">
+                        <img src="uploads/<?= $_SESSION['usuario']['fotoPerfil'] ?>" class="img-fluid rounded-circle" style="width: 70px">
                     <?php } ?>
                     <input type="text" hidden="hidden" name="fotoVieja" value="<?= $_SESSION['usuario']['fotoPerfil'] ?>">
                 </div>
