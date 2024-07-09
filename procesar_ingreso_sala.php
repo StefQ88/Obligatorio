@@ -1,7 +1,6 @@
 <?php
 
 include_once "comun.php";
-include_once "class/SalaDeConferencias.php";
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -48,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         }
     } else {
-        header('Location: index.php?error=Faltan datos obligatorios.');
+        header('Location: ingresar_sala.php?error=Faltan datos obligatorios.');
         exit();
     }
 }

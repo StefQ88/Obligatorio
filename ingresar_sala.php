@@ -1,3 +1,6 @@
+<?php
+include_once "comun.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,6 +28,7 @@
                         <?php } ?>
                     <?php } else if ($_SESSION['usuario']['tipoUsuario'] == 'administrador') { ?>
                         <li><a href="test.php">OfficeSpaces</a></li>
+                        <li> <img src="uploads/oficina.png" class="img-fluid rounded-circle"> </li>
                 </div>
             <?php } ?>
             <li><a href="index.php">Inicio</a></li>
@@ -51,45 +55,49 @@
     <div class="container">
         <div class="title">Ingreso de nueva sala</div>
         <div class="content">
-            <?php
-            if (isset($_GET['error'])) {
-                echo "<p class='error'>" . htmlspecialchars($_GET['error']) . "</p>"; //verifico si hay mensaje de error en la URL
-            }
-            ?>
+            <?php if (isset($_GET['error'])) { ?>
+                    <div class="alert alert-danger" role="alert">
+                        <?php echo $_GET['error']; ?>
+                    </div>
+                <?php } ?>
             <form action="procesar_ingreso_sala.php" method="post" enctype="multipart/form-data">
                 <div class="detalles-usuario">
                     <div class="input-box">
-                        <span class="detalles">Nombre de la Sala</span>
-                        <input type="text" name="nombre" placeholder="Nombre" required>
+                        <span class="detalles">Nombre de la Sala *</span>
+                        <input type="text" name="nombre" placeholder="Nombre">
                     </div>
                     <div class="input-box">
-                        <span class="detalles">Capacidad</span>
-                        <input type="number" name="capacidad" placeholder="Capacidad" required>
+                        <span class="detalles">Capacidad *</span>
+                        <input type="number" name="capacidad" placeholder="Capacidad">
                     </div>
                     <div class="input-box">
-                        <span class="detalles">Ubicacion</span>
-                        <input type="text" name="ubicacion" placeholder="Ubicacion" required>
+                        <span class="detalles">Ubicacion *</span>
+                        <input type="text" name="ubicacion" placeholder="Ubicacion">
                     </div>
                     <div class="input-box">
                         <span class="detalles">Equipamiento Disponible</span>
                         <textarea name="equipamientoDisponible" rows="3" placeholder="proyector, pizarra, etc."></textarea>
                     </div>
                     <div class="input-box">
-                        <span class="detalles">Estado</span>
+                        <span class="detalles">Estado * </span>
                         <select name="estado">
                             <option value="disponible">disponible</option>
                             <option value="no_disponible">no disponible</option>
                         </select>
                     </div>
                     <div class="input-box">
-                        <span class="detalles">Foto de la Sala</span>
-                        <input type="file" name="foto" required>
+                        <span class="detalles">Foto de la Sala *</span>
+                        <input type="file" name="foto">
                     </div>
                     <div class="button">
                         <input type="submit" value="Registrar"><br>
                     </div>
+                    
                 </div>
             </form>
+                <div>
+                    <p>Los campos con * son requeridos</p><br>
+                </div>
         </div>
     </div>
     <script>
