@@ -277,16 +277,17 @@ class datos extends DAO
         else return true;
     }*/
 
-    public function crearReserva($salaId, $usuarioId, $fechaReserva, $fechaInicio, $fechaFin)
+    public function crearReserva($salaId, $usuarioId, $fechaReserva, $fechaInicio, $fechaFin, $motivo)
     {
-        $query = "INSERT INTO datos (IdSala, CiEmpleado, fechaReserva, horaInicio, horaFin) 
-        VALUES (:IdSala, :CiEmpleado, :fechaReserva, :horaInicio, :horaFin)";
+        $query = "INSERT INTO datos (IdSala, CiEmpleado, fechaReserva, horaInicio, horaFin, motivo) 
+        VALUES (:IdSala, :CiEmpleado, :fechaReserva, :horaInicio, :horaFin, :motivo)";
         $stmt = $this->con->prepare($query);
         $stmt->bindValue(':IdSala', $salaId);
         $stmt->bindValue(':CiEmpleado', $usuarioId);
         $stmt->bindValue(':fechaReserva', $fechaReserva);
         $stmt->bindValue(':horaInicio', $fechaInicio);
         $stmt->bindValue(':horaFin', $fechaFin);
+        $stmt->bindValue(':motivo', $motivo);
         $sql = "UPDATE `saladeconferencias` SET `estado` = 'no_disponible' WHERE `id` = :idSala";
         $conexion = $this->con->prepare($sql);
         $conexion->bindValue(':idSala', $salaId);

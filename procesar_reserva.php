@@ -7,6 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
      $fechaReserva = $_POST['fechaReserva'];
      $fechaInicio = $_POST['horaInicio'];
      $fechaFin = $_POST['horaFin'];
+     $motivo = $_POST['motivo'];
 
     if (empty($salaId)){
         header("Location: asignar_reservas.php?error=la sala es requerido");
@@ -29,10 +30,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: asignar_reservas.php?error=la hora de fin es requerido");
          exit;
     }
+    else if (empty($motivo)){
+        header("Location: asignar_reservas.php?error=el motivo es requerido");
+         exit;
+    }
      else{
         if ($dato->validarFechas($fechaInicio, $fechaFin)) {
      // if ($dato->verificarDisponibilidad($salaId, $fechaReserva,$fechaReserva,$fechaInicio, $fechaFin)) {
-     $dato->crearReserva($salaId, $usuarioId, $fechaReserva, $fechaInicio, $fechaFin);
+     $dato->crearReserva($salaId, $usuarioId, $fechaReserva, $fechaInicio, $fechaFin, $motivo);
      header('Location: index.php?exito=Reserva realizada con éxito');
      /* } else {
             header('Location: asignar_reservas.php?error=La sala ya está reservada en la fecha seleccionada');

@@ -86,6 +86,10 @@
                 </select>
             </div>
             <div class="mb-3">
+                <label for="motivo" class="form-label">Motivo de la reserva</label>
+                <input type="text" name="motivo" class="form-control">
+            </div>
+            <div class="mb-3">
                 <label for="fechaReserva" class="form-label">Fecha de la reserva</label>
                 <input type="date" name="fechaReserva" class="form-control">
             </div>
