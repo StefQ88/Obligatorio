@@ -1,3 +1,12 @@
 Bica Melanie CI: 5.441.555-0
 Quiolla Stefani CI: 4.749.716-5
 Sibilia Santiago CI: 4.865.520-1
+
+Usuarios Registrados 
+
+Admiistrador
+administrador@mail.com
+admin123
+Empleado
+empleado@mail.com
+emp123

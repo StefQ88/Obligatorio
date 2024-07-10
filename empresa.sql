@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 09-07-2024 a las 20:48:04
+-- Tiempo de generación: 10-07-2024 a las 00:47:22
 -- Versión del servidor: 8.2.0
 -- Versión de PHP: 8.2.13
 
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `saladeconferencias` (
   `estado` enum('disponible','no_disponible') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `foto` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -79,6 +79,14 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `activo` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`ci`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`ci`, `primerNombre`, `segundoNombre`, `primerApellido`, `segundoApellido`, `fechaNacimiento`, `email`, `fotoPerfil`, `pass`, `tipoUsuario`, `activo`) VALUES
+('12345678', 'Administrador', '', 'Apellido', 'SegundoApellido', '2000-01-01', 'administrador@mail.com', '', '0192023a7bbd73250516f069df18b500', 'administrador', 1),
+('12345679', 'Empleado', '', 'Apellido', 'ApellidoDos', '2003-01-01', 'empleado@mail.com', '', '0314ee502c6f4e284128ad14e84e37d5', 'empleado', 1);
 
 --
 -- Restricciones para tablas volcadas
